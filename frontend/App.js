@@ -9,6 +9,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { MainStack } from './src/navigation/MainStack';
+import { UserProvider } from './src/contexts/UserContext';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -30,13 +31,15 @@ const App = () => {
     }
     // mode="modal" headerMode="none"
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-        <NavigationContainer>
-          <Root.Navigator initialRouteName='MainStack' id='Root'>
-            <Root.Screen name="MainStack" component={MainStack} options={{ headerShown: false }}/>
-          </Root.Navigator>
-        </NavigationContainer>
-    </GestureHandlerRootView>
+    <UserProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+          <NavigationContainer>
+            <Root.Navigator initialRouteName='MainStack' id='Root'>
+              <Root.Screen name="MainStack" component={MainStack} options={{ headerShown: false }}/>
+            </Root.Navigator>
+          </NavigationContainer>
+      </GestureHandlerRootView>
+    </UserProvider>
   );
 };
 
