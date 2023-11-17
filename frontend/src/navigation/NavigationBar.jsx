@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 
 import MapScreen from "../screens/NavigationBar/MapScreen";
+import ProfileScreen from "../screens/NavigationBar/ProfileScreen"
 
 import Animated, {useSharedValue} from "react-native-reanimated";
 
@@ -33,31 +34,74 @@ export const NavigationBar = () => {
                     marginHorizontal: 25,
                 },
                 headerTransparent: true,
-                
             }}
         >
             <Tab.Screen 
-                name="MapScreen" 
-                component={MapScreen} 
-                options={{
-                    tabBarShowLabel: false,
-                    headerShown: false,
-                    tabBarIcon: ({focused}) => (
-                        <View className='pt-8'>
-                            <Animated.View
-                                style={{
-                                    height: mapIconSize,
-                                    width: mapIconSize
-                                }}
-                            >
-                                <View className='w-[100px] h-[100px] bg-[#10E3A5]/[0.04] border-4 border-primary rounded-full items-center flex justify-center'>
-                                    <FlagIcon width='50%' height='50%' fill='#10E3A5'/>
-                                </View>
-                            </Animated.View>
-                        </View>
-                    ),
-                }}
-            />
+            name="ProfileSreen" 
+            component={ProfileScreen} 
+            options={{
+                tabBarShowLabel: false,
+                headerShown: false,
+                tabBarIcon: ({focused}) => (
+                    <View className='pt-8'>
+                        <Animated.View
+                            style={{
+                                height: mapIconSize,
+                                width: mapIconSize
+                            }}
+                        >
+                            <View className='w-[100px] h-[100px] bg-[#10E3A5]/[0.04] border-4 border-primary rounded-full items-center flex justify-center'>
+                                <FlagIcon width='50%' height='50%' fill='#10E3A5'/>
+                            </View>
+                        </Animated.View>
+                    </View>
+                ),
+            }}
+        />
+        <Tab.Screen 
+            name="MapScreen" 
+            component={MapScreen} 
+            options={{
+                tabBarShowLabel: false,
+                headerShown: false,
+                tabBarIcon: ({focused}) => (
+                    <View className='pt-8'>
+                        <Animated.View
+                            style={{
+                                height: mapIconSize,
+                                width: mapIconSize
+                            }}
+                        >
+                            <View className='w-[100px] h-[100px] bg-secondary-trans border-4 border-primary rounded-full items-center flex justify-center'>
+                                <FlagIcon width='50%' height='50%' fill='#10E3A5'/>
+                            </View>
+                        </Animated.View>
+                    </View>
+                ),
+            }}
+        />
+        <Tab.Screen 
+            name="ProfileScreen" 
+            component={ProfileScreen} 
+            options={{
+                tabBarShowLabel: false,
+                headerShown: false,
+                tabBarIcon: ({focused}) => (
+                    <View className='pt-8'>
+                        <Animated.View
+                            style={{
+                                height: mapIconSize,
+                                width: mapIconSize
+                            }}
+                        >
+                            <View className='w-[100px] h-[100px] bg-[#10E3A5]/[0.04]  items-center flex justify-center'>
+                                <FlagIcon width='50%' height='40%' fill='white'/>
+                            </View>
+                        </Animated.View>
+                    </View>
+                ),
+            }}
+        />
         </Tab.Navigator>
     )
 }
