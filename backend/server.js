@@ -19,7 +19,6 @@ const api = require('./api/index.js');
 
 app.use('/api', api);
 
-
 app.listen(EXPRESS_PORT, async () => {
     console.clear();
     console.log(`🎉 Server running on port ${EXPRESS_PORT} - ${SERVER_URL}:${EXPRESS_PORT} 🎉`);
