@@ -40,7 +40,7 @@ export default function ProfileScreen({navigation}){
                     <Text className="text-4xl mt-5 text-text" style={{fontFamily: 'SpaceGrotesk_700Bold'}}>Username</Text>
                     <Text className="text-xl mt-1 mb-5 text-gray-400" style={{fontFamily: 'SpaceGrotesk_700Bold'}}>he / him</Text>
                     <EventLine eventLocation={"Arad"} eventTitle={"Mobtrap Fan Meeting"}/>
-                    <FlatList
+                <FlatList
                 className='mt-[-12]'
                 data={data}
                 horizontal={true}
