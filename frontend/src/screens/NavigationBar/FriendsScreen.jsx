@@ -1,7 +1,7 @@
 import {View, Image, TouchableOpacity, Text, ImageBackground, FlatList} from 'react-native';
 import GradientGreen from '../../../assets/backgrounds/GradientGreen.png';
 
-export const FriendsScreen = () => {
+export const FriendsScreen = ({navigation}) => {
         const data = [
     { id: '1', text: 'Item 1' },
     { id: '2', text: 'Item 2' },
@@ -21,7 +21,7 @@ export const FriendsScreen = () => {
                 source={GradientGreen}
             />
             <View className='w-full top-20 flex flex-col items-center '>
-                <TouchableOpacity className='w-[90%] bg-primary h-auto p-5 rounded-md  flex flex-row items-center justify-center'>
+                <TouchableOpacity onPress={()=>navigation.navigate("GroupsScreen")} className='w-[90%] bg-primary h-auto p-5 rounded-md  flex flex-row items-center justify-center'>
                     <Text className="text-4xl text-bg-dark "  style={{fontFamily: 'SpaceGrotesk_700Bold'}} >Groups</Text>
                 </TouchableOpacity>
 

@@ -15,7 +15,8 @@ import PeopleIcon from '../../assets/icons/people-icon.svg';
 import { Avatar } from "../components/user/avatar";
 import ShopScreen from "../screens/NavigationBar/ShopScreen";
 import EventsScreen from "../screens/NavigationBar/EventsScreen";
-import { FriendsScreen } from "../screens/NavigationBar/FriendsScreen";
+
+import { FriendsStack } from "./stacks/FriendsStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -129,7 +130,7 @@ export const NavigationBar = ({navigation}) => {
             />
             <Tab.Screen 
                 name="FriendsScreen" 
-                component={FriendsScreen} 
+                component={FriendsStack} 
                 options={{
                     tabBarShowLabel: false,
                     headerShown: false,
