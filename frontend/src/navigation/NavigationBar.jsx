@@ -13,6 +13,7 @@ import LocationIcon from '../../assets/icons/location-icon.svg';
 import PeopleIcon from '../../assets/icons/people-icon.svg';
 
 import { Avatar } from "../components/user/avatar";
+import ShopScreen from "../screens/NavigationBar/ShopScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -64,7 +65,7 @@ export const NavigationBar = ({navigation}) => {
             /> 
             <Tab.Screen 
                 name="ShopScreen" 
-                component={MapScreen} 
+                component={ShopScreen} 
                 options={{
                     tabBarShowLabel: false,
                     headerShown: false,
