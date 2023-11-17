@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 
 import MapScreen from "../screens/NavigationBar/MapScreen";
+import ProfileScreen from "../screens/NavigationBar/UserProfileScreen"
 
 import Animated, { runOnJS, useSharedValue } from "react-native-reanimated";
 
@@ -22,7 +23,7 @@ export const NavigationBar = ({navigation}) => {
     return (
         <Tab.Navigator
             id="NavigationBar"
-            initialRouteName="MapScreen"
+            initialRouteName="ProfileScreen"
             screenOptions={{
                 showLabel: false,
                 tabBarStyle: {
@@ -39,7 +40,6 @@ export const NavigationBar = ({navigation}) => {
                     marginHorizontal: 25,
                 },
                 headerTransparent: true,
-                
             }}
         >
             <Tab.Screen 
