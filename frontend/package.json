@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo-google-fonts/ibm-plex-sans": "^0.2.3",
     "@expo-google-fonts/inter": "^0.2.3",
     "@expo-google-fonts/space-grotesk": "^0.2.3",
     "@react-navigation/bottom-tabs": "^6.5.11",

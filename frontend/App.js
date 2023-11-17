@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { useFonts, SpaceGrotesk_700Bold, SpaceGrotesk_300Light, SpaceGrotesk_500Medium } from '@expo-google-fonts/space-grotesk';
+import { useFonts as usePlexFonts, IBMPlexSans_700Bold, IBMPlexSans_400Regular, IBMPlexSans_300Light} from '@expo-google-fonts/ibm-plex-sans';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -20,6 +21,9 @@ const App = () => {
       SpaceGrotesk_700Bold,
       SpaceGrotesk_500Medium,
       SpaceGrotesk_300Light,
+      IBMPlexSans_700Bold,
+      IBMPlexSans_400Regular,
+      IBMPlexSans_300Light
     });
     if (!fontsLoaded && !fontError) {
       return null;
