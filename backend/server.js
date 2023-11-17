@@ -1,4 +1,4 @@
-//MAIN FILE
+//server
 const express = require('express');
 const { manageConnection, debug } = require('./config/mongo');
 const dotenv = require('dotenv');
@@ -11,12 +11,14 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+require('./config/socketio.js');
 
 
 const api = require('./api/index.js');
 
 
 app.use('/api', api);
+
 app.listen(EXPRESS_PORT, async () => {
     console.clear();
     console.log(`🎉 Server running on port ${EXPRESS_PORT} - ${SERVER_URL}:${EXPRESS_PORT} 🎉`);
