@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 
 import MapScreen from "../screens/NavigationBar/MapScreen";
-import ProfileScreen from "../screens/NavigationBar/UserProfileScreen"
+import ProfileScreen from "../screens/NavigationBar/UserProfileScreen";
 
 import Animated, { runOnJS, useSharedValue } from "react-native-reanimated";
 
@@ -14,6 +14,7 @@ import PeopleIcon from '../../assets/icons/people-icon.svg';
 
 import { Avatar } from "../components/user/avatar";
 import ShopScreen from "../screens/NavigationBar/ShopScreen";
+import EventsScreen from "../screens/NavigationBar/EventsScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -45,7 +46,7 @@ export const NavigationBar = ({navigation}) => {
         >
             <Tab.Screen 
                 name="ProfileScreen" 
-                component={MapScreen} 
+                component={ProfileScreen} 
                 options={{
                     tabBarShowLabel: false,
                     headerShown: false,
@@ -53,8 +54,8 @@ export const NavigationBar = ({navigation}) => {
                         <View className='pt-8'>
                             <Animated.View
                                 style={{
-                                    height: 35,
-                                    width: 35
+                                    height: 40,
+                                    width: 40
                                 }}
                             >
                                 <Avatar focused={focused} />
@@ -106,8 +107,8 @@ export const NavigationBar = ({navigation}) => {
                 }}
             />
             <Tab.Screen 
-                name="EventScreen" 
-                component={MapScreen} 
+                name="EventsScreen" 
+                component={EventsScreen} 
                 options={{
                     tabBarShowLabel: false,
                     headerShown: false,
