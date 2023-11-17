@@ -10,9 +10,7 @@ const manageConnection = {
     openConnection : async () => {
       try {
         await mongoose.connect(uri, {
-          dbName:"ActiveData",
-          useNewUrlParser: true,
-          useUnifiedTopology: true,
+          dbName:"UnifyData",
         });
         console.log("🍃 Client connected to MongoDB 🍃");
       } catch (error) {
