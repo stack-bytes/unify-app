@@ -65,7 +65,7 @@ export default function EventsScreen({navigation}){
                     <SearchBar></SearchBar>
                     
                     {
-                        isInEvent && <CurrentEvent/>
+                        isInEvent && <CurrentEvent onExitPress={() => setIsInEvent(!isInEvent)}/>
                     }
 
                     <View className='bg-[#0E0D0D]/[0.27] border-2 border-[#0E0D0D]/[0.29] w-[90vw] h-16 rounded-lg'>
