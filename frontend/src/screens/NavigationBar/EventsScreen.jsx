@@ -7,7 +7,8 @@ import { CurrentEvent } from "../../components/CurrentEvent";
 
 import ArrowIcon from "../../../assets/icons/arrow-icon.svg";
 import { TrendingIcon } from "../../components/trendingIcon";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
 const data = [
     {
@@ -46,8 +47,9 @@ const data = [
 ]
 
 export default function EventsScreen({navigation}){
-    const [isInEvent, setIsInEvent] = useState(true);
     const [listIsOpen, setListIsOpen] = useState(false);
+
+    const {user, toggleGhostMode} = useContext(UserContext);
     return (
         <View className='w-full h-full bg-bg-dark'>
             <ImageBackground 
@@ -63,9 +65,8 @@ export default function EventsScreen({navigation}){
                         Events
                     </Text>
                     <SearchBar></SearchBar>
-                    
                     {
-                        isInEvent && <CurrentEvent onExitPress={() => setIsInEvent(!isInEvent)}/>
+                        user.currentEvent && <CurrentEvent />
                     }
 
                     <View className='bg-[#0E0D0D]/[0.27] border-2 border-[#0E0D0D]/[0.29] w-[90vw] h-16 rounded-lg'>
