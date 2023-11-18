@@ -18,6 +18,8 @@ import EventsScreen from "../screens/NavigationBar/EventsScreen";
 
 import { FriendsStack } from "./stacks/FriendsStack";
 import { EventStack } from "./stacks/EventStack";
+import { ProfileStack } from "./stacks/ProfileStack";
+
 
 const Tab = createBottomTabNavigator();
 
@@ -49,7 +51,7 @@ export const NavigationBar = ({navigation}) => {
         >
             <Tab.Screen 
                 name="ProfileScreen" 
-                component={ProfileScreen} 
+                component={ProfileStack} 
                 options={{
                     tabBarShowLabel: false,
                     headerShown: false,
