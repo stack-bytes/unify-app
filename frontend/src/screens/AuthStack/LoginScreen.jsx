@@ -90,7 +90,7 @@ import EyeSlashIcon from '../../../assets/icons/eye-slash-solid.svg';
                         backgroundColor='rgba(22, 241, 228, 0.35)'
                         textColor={'#16F1E4'}
                         borderColor = {'#16F1E4'}
-
+                        onPress = {()=>navigation.getParent('Root').navigate('MainStack')}
                     />
                 </View>
             </View>
