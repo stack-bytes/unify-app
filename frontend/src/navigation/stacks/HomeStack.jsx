@@ -20,10 +20,6 @@ export const HomeStack = ({navigation}) => {
                 gestureEnabled: false,
             }}/>
 
-            <Stack.Screen name="CameraScreen" component={CameraScreen} options={{
-                headerShown: false, 
-                gestureEnabled: false,
-            }}/>
         </Stack.Navigator>
     )
 }

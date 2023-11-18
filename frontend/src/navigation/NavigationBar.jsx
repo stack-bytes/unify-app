@@ -112,11 +112,7 @@ export const NavigationBar = ({navigation}) => {
                             >
                                 <View className='w-full h-full bg-[#10E3A5]/[0.04] border-4 border-primary rounded-full items-center flex justify-center'>
                                     {
-                                        user.currentEvent ? (
-                                            <CameraIcon width='50%' height='50%' fill='#10E3A5'/>
-                                        ) : (
-                                            <FlagIcon width='50%' height='50%' fill='#10E3A5'/>
-                                        )
+                                        <FlagIcon width='50%' height='50%' fill={focused ? '#10E3A5' : '#FFF'}/>
                                     }
                                 </View>
                             </Animated.View>
