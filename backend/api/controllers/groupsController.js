@@ -1,4 +1,4 @@
-const { Group } =  require('../../models/Group-model'); 
+const { Group } =  require('../../models/group-model'); 
 
 const getGroups = async (req, res) => {
     try {
@@ -28,7 +28,7 @@ const getGroupById = async (req, res) => {
             return res.send({message: 'Group not found'});
         }
 
-        res.send({message: 'Group found!', data: Group});
+        res.send({message: 'Group found!', data: group});
     } catch (e) {
         console.log(e);
         res.send({message: 'Internal Server Error'});
@@ -113,7 +113,9 @@ const updateGroup = async (req, res) => {
             $currentDate: { updatedAt: true }
         });
 
-        return res.send({message: 'Success', data: group});
+        const newGroup = await Group.findById(groupId);
+
+        return res.send({message: 'Success', data: newGroup});
     } catch (e){
         res.status(500).json({message: e.message});
     }
