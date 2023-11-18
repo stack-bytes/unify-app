@@ -49,8 +49,8 @@ export default function MapScreen({navigation}){
                     <Marker
                         key={index}
                         coordinate={{
-                            latitude: Number(marker.location.latitude),
-                            longitude: Number(marker.location.longitude),
+                            latitude: 0,
+                            longitude: 0
                         }}
                         title={marker.title}
                         description={marker.description}

@@ -6,7 +6,7 @@ import { UserContext } from '../contexts/UserContext';
 import LogoutIcon from '../../assets/icons/logout-icon.svg';
 import InfoIcon from '../../assets/icons/info-icon.svg';
 
-export const CurrentEvent = ({navigation, manyButttons, joinButton }) => {
+export const CurrentEvent = ({navigation, manyButttons, joinButto }) => {
     const {user, setCurrentEvent} = useContext(UserContext);
 
     //buttons = 'join' 
