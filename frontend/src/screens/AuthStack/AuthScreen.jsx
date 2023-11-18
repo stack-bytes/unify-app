@@ -6,7 +6,7 @@ import { GenericButton } from '../../components/Buttons/genericButton';
 export default function AuthScreen() {
 
     return (
-        <View className = 'flex-1 items-center w-ful pt-2'>
+        <View className = 'flex-1 items-center w-full pt-2'>
             <Image 
             source={GradientGreen}
             className = 'bg-bg-dark w-full h-full absolute'/>
