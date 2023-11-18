@@ -1,34 +1,34 @@
-const { Event } =  require('../../models/event-model'); 
+const { Group } =  require('../../models/group-model'); 
 
-const getEvents = async (req, res) => {
+const getGroups = async (req, res) => {
     try {
-        const events = await Event.find({});
-        res.send(events);
+        const groups = await Group.find({});
+        res.send(groups);
     } catch (e) {
         console.log(e);
         res.send({message: 'Internal Server Error'});
     }
 }
 
-const getEventById = async (req, res) => {
+const getGroupById = async (req, res) => {
     try {
         const body = req.body;
 
         const {
-            eventId,
+            groupId,
         } = body;
 
-        if(!eventId){
-            return res.send({message: 'Missing eventId'});
+        if(!groupId){
+            return res.send({message: 'Missing groupId'});
         }
 
-        const event = await Event.findOne({_id: eventId});
+        const group = await Group.findOne({_id: groupId});
 
-        if(!event){
-            return res.send({message: 'Event not found'});
+        if(!group){
+            return res.send({message: 'Group not found'});
         }
 
-        res.send({message: 'Event found!', data: event});
+        res.send({message: 'Group found!', data: group});
     } catch (e) {
         console.log(e);
         res.send({message: 'Internal Server Error'});
@@ -36,7 +36,7 @@ const getEventById = async (req, res) => {
 
 }
 
-const createEvent = async (req, res) => {
+const createGroup = async (req, res) => {
     try {
         const body = req.body;
 
@@ -74,7 +74,7 @@ const createEvent = async (req, res) => {
             return res.send({message: 'Missing location'});
         }
 
-        const event = await Event.create({
+        const group = await Group.create({
             name,
             type,
             backgroundPic,
@@ -89,52 +89,54 @@ const createEvent = async (req, res) => {
             trending: false,
         });
 
-        res.send({message: 'Event created!', data: event});
+        res.send({message: 'Group created!', data: group});
     } catch (e) {
         console.log(e);
         res.send({message: 'Internal Server Error'});
     }
 }
 
-const updateEvent = async (req, res) => {
+const updateGroup = async (req, res) => {
     try {
         const body = req.body;
 
         const {
-            eventId,
+            groupId,
         } = body;
 
-        if(!eventId){
-            return res.send({message: 'Missing eventId'});
+        if(!groupId){
+            return res.send({message: 'Missing groupId'});
         }
 
-        const event = await Event.updateOne({_id: eventId}, {
+        const group = await Group.updateOne({_id: groupId}, {
             $set: body,
             $currentDate: { updatedAt: true }
         });
 
-        return res.send({message: 'Success', data: event});
+        const newGroup = await Group.findById(groupId);
+
+        return res.send({message: 'Success', data: newGroup});
     } catch (e){
         res.status(500).json({message: e.message});
     }
 
 }
 
-const deleteEvent = async (req, res) => {
+const deleteGroup = async (req, res) => {
     try {
         const body = req.body;
 
         const {
-            eventId,
+            groupId,
         } = body;
 
-        if(!eventId){
-            return res.send({message: 'Missing eventId'});
+        if(!groupId){
+            return res.send({message: 'Missing groupId'});
         }
 
-        const event = await Event.deleteOne({_id: eventId});
+        const group = await Group.deleteOne({_id: groupId});
 
-        return res.send({message: 'Success', data: event});
+        return res.send({message: 'Success', data: group});
     } catch (e){
         res.status(500).json({message: e.message});
     }
@@ -142,9 +144,9 @@ const deleteEvent = async (req, res) => {
 }
 
 module.exports = {
-    getEvents,
-    getEventById,
-    createEvent,
-    updateEvent,
-    deleteEvent,
+    getGroups,
+    getGroupById,
+    createGroup,
+    updateGroup,
+    deleteGroup,
 }
