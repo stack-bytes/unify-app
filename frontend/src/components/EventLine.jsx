@@ -1,10 +1,18 @@
 import {View, Text, StyleSheet} from 'react-native';
 import LiveStreamingSvg from '../../assets/icons/streaming.svg';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import { UserContext } from '../contexts/UserContext';
 
-const EventLine = ({eventTitle, eventLocation}) => {
+
+const EventLine = ({eventTitle, eventLocation, navigation}) => {
+
+
+
   return (
-    <TouchableOpacity className="w-[90vw] h-[auto] bg-bg-dark-trans rounded-md p-2 mt-5 flex flex-row items-center justify-start">
+    <TouchableOpacity onPress={()=>{
+        navigation.getParent("NavigationBar").navigate("EventStack",{screen:"EventInfoScreen"});
+    }}
+    className="w-[90vw] h-[auto] bg-bg-dark-trans rounded-md p-2 mt-5 flex flex-row items-center justify-start">
       <View className="p-0.5 bg-secondary-trans rounded-md border-2 border-primary">
         <LiveStreamingSvg></LiveStreamingSvg>
       </View>

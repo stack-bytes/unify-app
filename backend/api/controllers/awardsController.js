@@ -27,6 +27,14 @@ const userBuyAward = async (req, res) => {
     }
 }
 
+const getUserAwards = async(req, res)  => {
+    const userId = req.query.userId;
+
+    const user = await User.findById(userId);   
+    if(user){res.status(200).json(user.inventory);}
+    else {res.status(500).json({success:0})}
+}
+
 
 const getDailyShop = (req, res) => {
     try{
@@ -41,5 +49,6 @@ const getDailyShop = (req, res) => {
 
 module.exports = {
     userBuyAward,
-    getDailyShop
+    getDailyShop,
+    getUserAwards,
 }

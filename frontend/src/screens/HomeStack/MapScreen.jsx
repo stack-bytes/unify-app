@@ -1,4 +1,4 @@
-import { View,Text,Image, TouchableOpacity } from "react-native";
+import { View,Text,Image, TouchableOpacity,  } from "react-native";
 
 import MapView, { Marker } from 'react-native-maps';
 import FlagIcon from '../../../assets/icons/flag-icon.svg';
@@ -10,6 +10,7 @@ import LiveStreamingSvg from '../../../assets/icons/streaming.svg';
 import LogoutIcon from '../../../assets/icons/logout-icon.svg';
 import { EventBillboard } from "../../components/eventBillboard";
 
+import {SERVER_IP} from '../../../settings.json'
 import CameraIcon from '../../../assets/icons/camera-icon.svg';
 import { UserContext } from "../../contexts/UserContext";
 
@@ -34,13 +35,15 @@ export default function MapScreen({navigation}){
     const { user } = useContext(UserContext);
 
     useEffect(() => {
-        fetch('http://localhost:3000/api/events/getEvents')
+        fetch(`${SERVER_IP}:4949/api/events/getMarkers`)
             .then(res => res.json())
             .then(data => {
                 setMarkers(data);
             })
+            
         setFocusedMarkerIndex(-1);
     }, []);
+
     return (
         <View className='w-full h-full items-center'>
             <MapView
@@ -49,7 +52,10 @@ export default function MapScreen({navigation}){
                 {markers.map((marker, index) => (
                     <Marker
                         key={index}
-                        coordinate={marker.coords}
+                        coordinate={{
+                            latitude: Number(marker.location.latitude),
+                            longitude: Number(marker.location.longitude),
+                        }}
                         title={marker.title}
                         description={marker.description}
                         onPress={() => setFocusedMarkerIndex(index)}
