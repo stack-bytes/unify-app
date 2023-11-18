@@ -20,7 +20,7 @@ import EventsScreen from "../screens/NavigationBar/EventsScreen";
 import { FriendsStack } from "./stacks/FriendsStack";
 import { EventStack } from "./stacks/EventStack";
 import { ProfileStack } from "./stacks/ProfileStack";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { HomeStack } from "./stacks/HomeStack";
 
@@ -33,7 +33,7 @@ export const NavigationBar = ({navigation}) => {
     const mapIconSize = useSharedValue(70);
     const profileIconSize = useSharedValue(80);
 
-    const {user} = useContext(UserContext);
+    const {user, isInEventCreatingMode, setIsInEventCreatingMode} = useContext(UserContext);
     return (
         <Tab.Navigator
             id="NavigationBar"
@@ -119,6 +119,14 @@ export const NavigationBar = ({navigation}) => {
                         </View>
                     ),
                 }}
+                listeners={({navigation, route}) => ({
+                    tabPress: (e) => {
+                        if(route.name == 'HomeStack'){
+                            setIsInEventCreatingMode(!isInEventCreatingMode);
+                        }
+                    }
+
+                })}
             />
             <Tab.Screen 
                 name="EventStack" 
