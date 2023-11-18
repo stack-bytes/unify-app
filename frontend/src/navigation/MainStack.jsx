@@ -5,6 +5,7 @@ import { NavigationBar } from './NavigationBar';
 import { AuthStack } from './AuthStack';
 import PronounsScreen from '../screens/ProfileStack/PronounsScreen';
 import { CameraScreen } from '../screens/HomeStack/CameraScreen';
+import PhotoScreen from '../screens/MainStack/PhotoScreen';
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,11 @@ export const MainStack = ({ navigation }) => {
       }}/>
 
       <Stack.Screen name="CameraScreen" component={CameraScreen} options={{
+          headerShown: false, 
+          gestureEnabled: false,
+      }}/>
+
+      <Stack.Screen name="PhotoScreen" component={PhotoScreen} options={{
           headerShown: false, 
           gestureEnabled: false,
       }}/>
