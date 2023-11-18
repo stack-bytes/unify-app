@@ -7,8 +7,15 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({
     id: 1,
     username: 'johndoe',
+    pronouns: ["he","him","she"],
     pfp: 'https://picsum.photos/200/300',
     currentEvent: '6558d27239638819552dd1e4',
+    awards:  [
+        { id: '1', text: 'Award 1', subtext:"An amazing award for an amazing person", img: 'https://picsum.photos/seed/picsum/200/300' },
+        { id: '2', text: 'Award 2', subtext:"An amazing award for an amazing person", img: 'https://picsum.photos/seed/picsum/200/300' },
+        { id: '3', text: 'Award 3', subtext:"An amazing award for an amazing person", img: 'https://picsum.photos/seed/picsum/200/300' },
+        { id: '4', text: 'Award 4', subtext:"An amazing award for an amazing person", img: 'https://picsum.photos/seed/picsum/200/300' },
+    ],
     location: null,
     ghostMode: false,
   });
