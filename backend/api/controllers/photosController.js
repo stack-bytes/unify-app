@@ -64,8 +64,31 @@ const postPhoto = async (req, res) => {
     }
 }
 
+const getPhotosFromEvent = async (req, res) => {
+    try {
+        const eventId = req.params.eventId;
+
+        if(!eventId){
+            return res.send({message: 'Missing eventId'});
+        }
+
+        const photos = await EventPhoto.find({eventId: eventId});
+
+        if(photos.length === 0){
+            return res.send({message: 'No photos found'});
+        }
+
+        res.send({message: 'Photos found!', data: photos});
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({message: e.message});
+    
+    }
+}
+
 
 module.exports = {
     getPhotos,
     postPhoto,
+    getPhotosFromEvent,
 }

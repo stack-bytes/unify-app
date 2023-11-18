@@ -22,11 +22,11 @@ const getMarkers = async (req, res) => {
 
 const getEventById = async (req, res) => {
     try {
-        const body = req.body;
+        //const body = req.body;
 
-        const {
-            eventId,
-        } = body;
+        const eventId = req.params.eventId;
+
+        console.log(req.params);
 
         if(!eventId){
             return res.send({message: 'Missing eventId'});
