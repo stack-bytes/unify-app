@@ -54,7 +54,7 @@ export default function EventsScreen({navigation}){
     const {user, toggleGhostMode} = useContext(UserContext);
     return (
         <View className='w-full h-full bg-bg-dark'>
-            <NotificationModal />
+            <DeleteModal />
             <ImageBackground 
                 className='w-full h-full absolute'
                 source={GradientGreen}
