@@ -12,6 +12,8 @@ export const UserProvider = ({children}) => {
         ghostMode: false,
     });
 
+    const [isInEventCreatingMode, setIsInEventCreatingMode] = useState(true);
+
     const toggleGhostMode = () => {
         setUser({
             ...user,
@@ -31,7 +33,9 @@ export const UserProvider = ({children}) => {
             user,
             setUser,
             toggleGhostMode,
-            setCurrentEvent
+            setCurrentEvent,
+            isInEventCreatingMode,
+            setIsInEventCreatingMode,
         }}>
             {children}
         </UserContext.Provider>
