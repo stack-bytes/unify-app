@@ -6,6 +6,7 @@ import SwitchIcon from '../../../assets/icons/switch-icon.svg';
 import TrashIcon from '../../../assets/icons/trash-icon.svg';
 import LocationIcon from '../../../assets/icons/location-icon.svg';
 import FlagIcon from '../../../assets/icons/flag-icon.svg';
+import ArrowIcon from '../../../assets/icons/arrow-icon.svg';
 
 export const CameraScreen = ({navigation}) => {
     const [hasPermission, setHasPermission] = useState(null);
@@ -41,7 +42,9 @@ export const CameraScreen = ({navigation}) => {
           body: formData,
         });
 
-        navigation.goBack();
+        navigation.getParent().navigate('HomeStack', {
+          screen: 'MapScreen'
+        });
       } catch (e) {
         console.log(e);
       }
@@ -115,7 +118,24 @@ export const CameraScreen = ({navigation}) => {
           :
             <View className='absolute w-full h-20 items-center z-20 bottom-40 flex-row justify-center'>
               <TouchableOpacity
-                className='absolute w-10 h-10 left-6'
+                className='absolute w-20 h-20 left-10 justify-center'
+                onPress={() => navigation.goBack()}
+              >
+                <ArrowIcon 
+                  height='150%' width='40%' fill='white'
+                  style = {{
+                    transform: [
+                      {rotate: '90deg'}
+                    ]
+                  }}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                className='w-20 h-20 bg-transparent border-8 border-white rounded-full'
+                onPress={takePhoto}
+              />
+              <TouchableOpacity
+                className='absolute w-10 h-10 right-10'
                 onPress={() =>   setType(
                   type === Camera.Constants.Type.back
                     ? Camera.Constants.Type.front
@@ -124,10 +144,6 @@ export const CameraScreen = ({navigation}) => {
               >
                 <SwitchIcon height='100%' fill='white'/>
               </TouchableOpacity>
-              <TouchableOpacity
-                className='w-20 h-20 bg-transparent border-8 border-white rounded-full'
-                onPress={takePhoto}
-              />
 
             </View>
         }

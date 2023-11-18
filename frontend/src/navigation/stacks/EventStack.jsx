@@ -6,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import EventsScreen from '../../screens/NavigationBar/EventsScreen';
 import { EventInfoScreen } from '../../screens/EventsStack/EventInfoScreen';
-import { CameraScreen } from '../../screens/EventsStack/CameraScreen';
+import { CameraScreen } from '../../screens/HomeStack/CameraScreen';
 import { EventDashboardScreen } from '../../screens/EventsStack/EventDashboardScreen';
 
 
@@ -19,14 +19,9 @@ export const EventStack = ({navigation}) => {
       screenOptions={{
         detachPreviousScreen: false,
       }}
-      id='MainStack'
+      id='EventStack'
       >
       <Stack.Screen name="EventsScreen" component={EventsScreen} options={{
-           headerShown: false, 
-           gestureEnabled: false,
-      }}/>
-
-      <Stack.Screen name="CameraScreen" component={CameraScreen} options={{
            headerShown: false, 
            gestureEnabled: false,
       }}/>
