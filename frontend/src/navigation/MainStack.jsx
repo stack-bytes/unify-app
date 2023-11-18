@@ -11,7 +11,7 @@ export const MainStack = ({ navigation }) => {
   
   return (
     <Stack.Navigator 
-      initialRouteName='NavigationBar'
+      initialRouteName='PronounsScreen'
       screenOptions={{
         detachPreviousScreen: false,
       }}
