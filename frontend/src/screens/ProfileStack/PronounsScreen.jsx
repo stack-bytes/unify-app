@@ -3,6 +3,7 @@ import { GenericButton } from "../../components/Buttons/genericButton";
  
 import GradientGreen from "../../../assets/backgrounds/GradientGreen.png";
 import { useState } from "react";
+import flagIcon from "../../../assets/icons/flag-icon.svg";	
 
 
 export default function PronounsScreen() {
@@ -49,36 +50,30 @@ export default function PronounsScreen() {
                             className = 'pl-2 w-full h-full text-[20px] text-white font-bold'	
                             />
                     </View>
+                    <View className = 'w-[85%] pt-2'>
+                        <FlatList
+                                className = 'w-full'
+                                data={pronouns}
+                                horizontal={true}
+                                showsHorizontalScrollIndicator={false}
+                                renderItem={({ item }) => (
+                                    
+                                    <TouchableOpacity>
+                                        <View className = 'w-24 h-8 items-center justify-center border-[1px] rounded-lg bg-slate-950/[.15] mr-4'>
+                                            <Text className = 'text-white/[0.4] text-[12px] font-bold'>{item.title}</Text>
+                                        </View>
+                                    </TouchableOpacity>
+
+                                ) }
+                                keyExtractor={item => item.id}
+                        />
+                    </View>
                 </View>	
 
 
                 
 
-                <View>
-                    <FlatList
-                        data={pronouns}
-                        horizontal={true}
-                        renderItem={({ item }) => (
-                            
-                            <TouchableOpacity>
-                                <View className = 'w-32 h-14 items-center justify-center border-[1px] rounded-lg bg-slate-950/[.15] mr-4'>
-                                    <Text className = 'text-white text-[20px] font-bold'>{item.title}</Text>
-                                </View>
-                            </TouchableOpacity>
-
-                        ) }
-                        keyExtractor={item => item.id}
-                    />
-                </View>
-
-
                 
-
-                <View>
-                            
-                </View>
-
-
 
                 <View className = 'items-center w-full'>
 
@@ -95,8 +90,6 @@ export default function PronounsScreen() {
                         textColor={'#C94646'}
                         borderColor = {'#C94646'}
                     />
-
-
 
                 </View>
             </View>
