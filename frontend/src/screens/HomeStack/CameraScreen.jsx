@@ -6,8 +6,9 @@ import SwitchIcon from '../../../assets/icons/switch-icon.svg';
 import TrashIcon from '../../../assets/icons/trash-icon.svg';
 import LocationIcon from '../../../assets/icons/location-icon.svg';
 import FlagIcon from '../../../assets/icons/flag-icon.svg';
+import ArrowIcon from '../../../assets/icons/arrow-icon.svg';
 
-export const CameraScreen = ({navigation}) => {
+export const CameraScreen = ({navigation, route}) => {
     const [hasPermission, setHasPermission] = useState(null);
     const [type, setType] = useState(Camera.Constants.Type.back);
     const [image, setImage] = useState(null);
@@ -41,7 +42,9 @@ export const CameraScreen = ({navigation}) => {
           body: formData,
         });
 
-        navigation.goBack();
+        navigation.getParent().navigate('HomeStack', {
+          screen: 'MapScreen'
+        });
       } catch (e) {
         console.log(e);
       }
@@ -52,6 +55,14 @@ export const CameraScreen = ({navigation}) => {
         setHasPermission(status === 'granted');
       })();
     }, []);
+    
+    useEffect(() => {
+      const unsubscribe = navigation.addListener('focus', () => {
+        //navigation.navigate('MapScreen');
+      });
+
+      return unsubscribe;
+    },[navigation]);
   
     if (hasPermission === null) {
       return <View />;
@@ -89,7 +100,7 @@ export const CameraScreen = ({navigation}) => {
               <View className='w-full h-full absolute opacity-30 bg-bg-dark z-10'/>
               <Image source={{uri: image}} className='w-full h-full absolute' />
 
-              <View className='absolute w-full h-20 items-center z-20 bottom-40 flex-row justify-center'>
+              <View className='absolute w-full h-20 items-center z-20 bottom-20 flex-row justify-center'>
                 <TouchableOpacity
                   className='absolute w-10 h-10 right-10 bg-[#C94646] border-2 border-[#BF4040]/[0.71] rounded-full items-center justify-center'
                   onPress={() => setImage(null)}
@@ -113,9 +124,26 @@ export const CameraScreen = ({navigation}) => {
               </View>
             </View>
           :
-            <View className='absolute w-full h-20 items-center z-20 bottom-40 flex-row justify-center'>
+            <View className='absolute w-full h-20 items-center z-20 bottom-20 flex-row justify-center'>
               <TouchableOpacity
-                className='absolute w-10 h-10 left-6'
+                className='absolute w-20 h-20 left-10 justify-center'
+                onPress={() => navigation.goBack()}
+              >
+                <ArrowIcon 
+                  height='150%' width='40%' fill='white'
+                  style = {{
+                    transform: [
+                      {rotate: '90deg'}
+                    ]
+                  }}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                className='w-20 h-20 bg-transparent border-8 border-white rounded-full'
+                onPress={takePhoto}
+              />
+              <TouchableOpacity
+                className='absolute w-10 h-10 right-10'
                 onPress={() =>   setType(
                   type === Camera.Constants.Type.back
                     ? Camera.Constants.Type.front
@@ -124,10 +152,6 @@ export const CameraScreen = ({navigation}) => {
               >
                 <SwitchIcon height='100%' fill='white'/>
               </TouchableOpacity>
-              <TouchableOpacity
-                className='w-20 h-20 bg-transparent border-8 border-white rounded-full'
-                onPress={takePhoto}
-              />
 
             </View>
         }
