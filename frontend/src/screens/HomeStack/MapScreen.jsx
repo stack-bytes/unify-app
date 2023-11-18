@@ -85,7 +85,7 @@ export default function MapScreen({navigation}){
                     </View>
             }
             {
-                user.currentEvent && (
+                (
                     <View className='w-16 h-16 z-10 bg-[#05B280]/[0.8] absolute right-2 top-72 rounded-full border-4 border-[#10E3A5]/[0.9] items-center justify-center'>
                         <TouchableOpacity 
                             className='z-20 w-full h-full absolute'

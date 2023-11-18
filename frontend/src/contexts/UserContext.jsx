@@ -7,7 +7,7 @@ export const UserProvider = ({children}) => {
         id: 1,
         username: 'johndoe',
         pfp: 'https://picsum.photos/200/300',
-        currentEvent: 'test',
+        currentEvent: null,
         location: null,
         ghostMode: false,
     });
