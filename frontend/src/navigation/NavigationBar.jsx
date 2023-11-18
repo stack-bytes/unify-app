@@ -17,6 +17,7 @@ import ShopScreen from "../screens/NavigationBar/ShopScreen";
 import EventsScreen from "../screens/NavigationBar/EventsScreen";
 
 import { FriendsStack } from "./stacks/FriendsStack";
+import { EventStack } from "./stacks/EventStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -109,8 +110,8 @@ export const NavigationBar = ({navigation}) => {
                 }}
             />
             <Tab.Screen 
-                name="EventsScreen" 
-                component={EventsScreen} 
+                name="EventsStack" 
+                component={EventStack} 
                 options={{
                     tabBarShowLabel: false,
                     headerShown: false,

@@ -14,19 +14,24 @@ const Stack = createStackNavigator();
 export const EventStack = ({navigation}) => {
     return(
     <Stack.Navigator 
-      initialRouteName='EventsScreen'
+      initialRouteName='CameraScreen'
       screenOptions={{
         detachPreviousScreen: false,
       }}
       id='MainStack'
       >
 
+      <Stack.Screen name="EventsScreen" component={EventsScreen} options={{
+            headerShown: false, 
+            gestureEnabled: false,
+      }}/>
+
       <Stack.Screen name="CameraScreen" component={CameraScreen} options={{
            headerShown: false, 
            gestureEnabled: false,
       }}/>
 
-      <Stack.Screen name="EventInfoScreen" component={GroupsScreen} options={{
+      <Stack.Screen name="EventInfoScreen" component={CameraScreen} options={{
         headerShown: false, 
         gestureEnabled: false,
       }}/>
