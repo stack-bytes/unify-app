@@ -3,6 +3,7 @@ import { GenericButton } from "../../components/Buttons/genericButton";
  
 import GradientGreen from "../../../assets/backgrounds/GradientGreen.png";
 import { useState } from "react";
+
 import flagIcon from "../../../assets/icons/flag-icon.svg";	
 
 
@@ -70,8 +71,6 @@ export default function PronounsScreen() {
                     </View>
                 </View>	
 
-
-                
 
                 
 
