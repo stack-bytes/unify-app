@@ -15,7 +15,7 @@ const Stack = createStackNavigator();
 export const EventStack = ({navigation}) => {
     return(
     <Stack.Navigator 
-      initialRouteName='CameraScreen'
+      initialRouteName='EventsScreen'
       screenOptions={{
         detachPreviousScreen: false,
       }}

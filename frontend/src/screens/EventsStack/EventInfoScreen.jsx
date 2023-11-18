@@ -24,7 +24,7 @@ export const EventInfoScreen = ({navigation}) => {
                     source={GradientGreen}
                 />
                 <View className="mt-20">
-                <CurrentEvent manyButttons={false} navigation={navigation} ></CurrentEvent>
+                <CurrentEvent manyButttons='share' navigation={navigation} ></CurrentEvent>
                 </View>
 
                 <Text className='text-4xl text-text mb-[-20]'>People</Text>
