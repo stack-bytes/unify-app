@@ -25,13 +25,25 @@ export default function ProfileScreen({navigation}){
         <View className='w-full h-full'>
             <ImageBackground source={GradientBlue} className='w-full h-full flex flex-col items-center justify-start'>
             <View className='w-full h-full p-2 flex flex-col items-center justify-start'>
-                    <View className="w-72 h-72 bg-bg-light-trans rounded-full mt-14 flex flex-row items-center justify-center">
-                        <Image className='w-[90%] h-[90%] rounded-full' source={{uri: "https://imgs.search.brave.com/8kGu884s4LEEEGG8fdg0GUhcEAsIFbXE6bzj1HSdnB0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jb250/ZW50LmZvcnR1bmUu/Y29tL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDIzLzExL0FQMjMz/MTI3MjYyNTU3MjIt/ZTE2OTk0NzczMTI3/NDguanBnP3c9MTQ0/MCZxPTc1"}}></Image>
+                    <View className='w-[250px] h-[250px] mt-20'>
+                        <TouchableOpacity onPress={()=>navigation.getParent('ProfileStack').navigate("UserSettingsScreen")}>
+                        <Image 
+                            source={{uri: "https://imgs.search.brave.com/8kGu884s4LEEEGG8fdg0GUhcEAsIFbXE6bzj1HSdnB0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jb250/ZW50LmZvcnR1bmUu/Y29tL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDIzLzExL0FQMjMz/MTI3MjYyNTU3MjIt/ZTE2OTk0NzczMTI3/NDguanBnP3c9MTQ0/MCZxPTc1"}}
+                            className='w-full h-full rounded-full border-8 border-bg-light'
+                        />
+                        </TouchableOpacity>
+                        
+                        <View className='absolute rounded-full w-10 h-10 bottom-5 right-2 bg-bg-dark flex justify-center items-center'>
+                            <View className='rounded-full w-8 h-8 bg-primary'/>
+                        </View>
+                        <View className='absolute rounded-full w-10 h-10 bottom-14 right-[-10]  bg-bg-dark opacity-90 border-4 flex justify-center items-center'>
+                            <Text className='rounded-full'>👻</Text>
+                        </View>
                     </View>
                     <Text className="text-4xl mt-5 text-text" style={{fontFamily: 'SpaceGrotesk_700Bold'}}>Username</Text>
-                    <Text className="text-xl mt-1 text-gray-400" style={{fontFamily: 'SpaceGrotesk_700Bold'}}>he / him</Text>
+                    <Text className="text-xl mt-1 mb-5 text-gray-400" style={{fontFamily: 'SpaceGrotesk_700Bold'}}>he / him</Text>
                     <EventLine eventLocation={"Arad"} eventTitle={"Mobtrap Fan Meeting"}/>
-                    <FlatList
+                <FlatList
                 className='mt-[-12]'
                 data={data}
                 horizontal={true}
@@ -39,7 +51,7 @@ export default function ProfileScreen({navigation}){
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
                   <View className="flex m-5 mt-10  items-center">
-                    <View className='w-44 h-44 rounded-lg bg-bg-dark-trans border '>
+                    <View className='w-44 h-44 rounded-lg bg-bg-dark-trans border'>
                         <TouchableOpacity className='w-full h-full flex flex-col items-center justify-center'>
                             <Image className="w-[50%] h-[50%]" source={{uri: "https://imgs.search.brave.com/8kGu884s4LEEEGG8fdg0GUhcEAsIFbXE6bzj1HSdnB0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jb250/ZW50LmZvcnR1bmUu/Y29tL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDIzLzExL0FQMjMz/MTI3MjYyNTU3MjIt/ZTE2OTk0NzczMTI3/NDguanBnP3c9MTQ0/MCZxPTc1"}}></Image>
                             <Text className='text-xl text-text ' style={{fontFamily: 'SpaceGrotesk_500Medium'}}>

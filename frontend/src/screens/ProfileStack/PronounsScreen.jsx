@@ -3,10 +3,11 @@ import { GenericButton } from "../../components/Buttons/genericButton";
  
 import GradientGreen from "../../../assets/backgrounds/GradientGreen.png";
 import { useState } from "react";
+
 import flagIcon from "../../../assets/icons/flag-icon.svg";	
 
 
-export default function PronounsScreen() {
+export default function PronounsScreen({navigation}) {
 
     const [text, setText] = useState('');
     const [pronouns, setPronouns] = useState([]);
@@ -138,11 +139,13 @@ export default function PronounsScreen() {
                         borderColor = {'#10E3A5'}
                     />
                     
+                    
                     <GenericButton
                         buttonText = "Back"
                         backgroundColor={`rgba(201, 70, 70, 0.17))`}
                         textColor={'#C94646'}
                         borderColor = {'#C94646'}
+                        onPress={()=>navigation.navigate("UserSettingsScreen")}
                     />
 
                 </View>

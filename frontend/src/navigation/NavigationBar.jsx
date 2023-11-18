@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 
 import MapScreen from "../screens/NavigationBar/MapScreen";
-import ProfileScreen from "../screens/NavigationBar/UserProfileScreen"
+import ProfileScreen from "../screens/NavigationBar/UserProfileScreen";
 
 import Animated, { runOnJS, useSharedValue } from "react-native-reanimated";
 
@@ -14,6 +14,12 @@ import PeopleIcon from '../../assets/icons/people-icon.svg';
 
 import { Avatar } from "../components/user/avatar";
 import ShopScreen from "../screens/NavigationBar/ShopScreen";
+import EventsScreen from "../screens/NavigationBar/EventsScreen";
+
+import { FriendsStack } from "./stacks/FriendsStack";
+import { EventStack } from "./stacks/EventStack";
+import { ProfileStack } from "./stacks/ProfileStack";
+
 
 const Tab = createBottomTabNavigator();
 
@@ -31,7 +37,7 @@ export const NavigationBar = ({navigation}) => {
                     zIndex: 20,
                     position: 'absolute',
                     bottom: 35,
-                    backgroundColor: 'rgba(14, 13, 13, 0.27)',
+                    backgroundColor: 'rgba(14, 13, 13, 0.77)',
                     borderRadius: 16,
                     borderWidth: 2,
                     borderTopWidth: 2,
@@ -45,7 +51,7 @@ export const NavigationBar = ({navigation}) => {
         >
             <Tab.Screen 
                 name="ProfileScreen" 
-                component={MapScreen} 
+                component={ProfileStack} 
                 options={{
                     tabBarShowLabel: false,
                     headerShown: false,
@@ -53,8 +59,8 @@ export const NavigationBar = ({navigation}) => {
                         <View className='pt-8'>
                             <Animated.View
                                 style={{
-                                    height: 35,
-                                    width: 35
+                                    height: 40,
+                                    width: 40
                                 }}
                             >
                                 <Avatar focused={focused} />
@@ -106,8 +112,8 @@ export const NavigationBar = ({navigation}) => {
                 }}
             />
             <Tab.Screen 
-                name="EventScreen" 
-                component={MapScreen} 
+                name="EventsStack" 
+                component={EventStack} 
                 options={{
                     tabBarShowLabel: false,
                     headerShown: false,
@@ -127,7 +133,7 @@ export const NavigationBar = ({navigation}) => {
             />
             <Tab.Screen 
                 name="FriendsScreen" 
-                component={MapScreen} 
+                component={FriendsStack} 
                 options={{
                     tabBarShowLabel: false,
                     headerShown: false,
