@@ -3,10 +3,10 @@ import GradientGreen from "../../../assets/backgrounds/GradientGreen.png";
 import { GenericButton } from '../../components/Buttons/genericButton';
 
 
-export default function AuthScreen() {
+export default function AuthScreen({navigation}) {
 
     return (
-        <View className = 'flex-1 items-center w-full pt-2'>
+        <View className = 'flex items-center w-full h-full'>
             <Image 
             source={GradientGreen}
             className = 'bg-bg-dark w-full h-full absolute'/>
@@ -34,6 +34,10 @@ export default function AuthScreen() {
                         backgroundColor={`rgba(16, 227, 165, 0.17)`}
                         textColor={'#10E3A5'}
                         borderColor = {'#10E3A5'}
+                        onPress = {()=>navigation.getParent().navigate('AuthStack', {
+                            screen: 'SignupScreen'
+                        })}
+
                     />
 
                     <GenericButton
@@ -41,6 +45,9 @@ export default function AuthScreen() {
                         backgroundColor={`rgba(22, 241, 228, 0.17))`}
                         textColor={'#16F1E4'}
                         borderColor = {'#16F1E4'}
+                        onPress = {()=>navigation.getParent().navigate('AuthStack', {
+                            screen: 'LoginScreen'
+                        })}
                     />
                 </View>
             </View>
