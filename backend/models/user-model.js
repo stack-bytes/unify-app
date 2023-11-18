@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
     },
     ghostMode: Boolean, // whether the user is in ghost mode or not (determines whether the user's location is visible to other users)
     groups: [], // the id's of every group the user is in
-    
+    pronouns: [] //the pronouns (string[]) of the user [he/him, she/her, they/them]
 })
 
 const User = mongoose.model('User', userSchema);
