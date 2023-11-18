@@ -9,7 +9,7 @@ import { useContext, useState, useEffect } from 'react';
 
 export const EventInfoScreen = ({navigation, route}) => {
     const data = [
-        { id: '1', text: 'davidphex', photo: 'https://res.cloudinary.com/dvbzt3rq8/image/upload/f_auto,q_auto/glqdszt99rlzgwkdwo93' },
+        { id: '1', username: 'davidphex', photo: 'https://res.cloudinary.com/dvbzt3rq8/image/upload/f_auto,q_auto/glqdszt99rlzgwkdwo93' },
         { id: '2', text: 'Item 2' },
         { id: '3', text: 'Item 3' },
         { id: '4', text: 'Item 4' },
@@ -22,6 +22,9 @@ export const EventInfoScreen = ({navigation, route}) => {
 
     const [eventData, setEventData] = useState(null);
     const [photos, setPhotos] = useState(null);
+    const [globalData, setGlobalData] = useState(null);
+    const [eventMembers, setEventMembers] = useState(null);
+
     const {user} = useContext(UserContext);
 
     useEffect(() => {
@@ -29,14 +32,21 @@ export const EventInfoScreen = ({navigation, route}) => {
             .then(res => res.json())
             .then(data => {
                 setEventData(data);
+                setEventMembers(data.members);
             })
     },[]);
 
     useEffect(() => {
         fetch(`http://172.20.10.8:4949/api/photos/getPhotosFromEvent/6558d27239638819552dd1e4`)
             .then(res => res.json())
-            .then(data => {
-                setPhotos(data);
+            .then(result => {
+                console.log(result);
+                result.data.map((item, index) => {
+                    //find item in eventMembers with the same userId value and add the photo to that item and keep it mind it's a usestate
+                    setEventMembers([...eventMembers, member.photo = item.photo]);
+
+                })
+                console.log(eventMembers);
             })
     })
 

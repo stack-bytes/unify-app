@@ -14,6 +14,8 @@ import {SERVER_IP} from '../../../settings.json'
 import CameraIcon from '../../../assets/icons/camera-icon.svg';
 import { UserContext } from "../../contexts/UserContext";
 
+import * as Location from 'expo-location';
+
 export default function MapScreen({navigation}){
     const [markers, setMarkers] = useState([
     ]);
@@ -27,7 +29,22 @@ export default function MapScreen({navigation}){
         longitudeDelta: 0.0421,
     });
 
-    const { user, isInEventCreatingMode, setIsInEventCreatingMode } = useContext(UserContext);
+    const { user, setLocation, isInEventCreatingMode, setIsInEventCreatingMode } = useContext(UserContext);
+
+    useEffect(() => {
+        (async () => {
+          
+          let { status } = await Location.requestForegroundPermissionsAsync();
+          if (status !== 'granted') {
+            setErrorMsg('Permission to access location was denied');
+            return;
+          }
+    
+          let location = await Location.getCurrentPositionAsync({});
+          setLocation(location);
+          console.log(location);
+        })();
+      }, []);
 
     useEffect(() => {
         fetch(`${SERVER_IP}:4949/api/events/getMarkers`)
@@ -77,6 +94,21 @@ export default function MapScreen({navigation}){
 
                         </Marker>
                 }
+                <Marker
+                    coordinate={user.location?.coords}
+                    title='You'
+                    style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                >
+                    <View className='w-10 h-10'>
+                        <Image
+                            className='w-full h-full absolute rounded-full border-primary border-2'
+                            source={{uri: user.pfp}}
+                        />
+                    </View>
+                </Marker>
             </MapView>
             {
                 focusedMarkerIndex != -1 &&     
@@ -85,7 +117,7 @@ export default function MapScreen({navigation}){
                     </View>
             }
             {
-                user.currentEvent && (
+                (
                     <View className='w-16 h-16 z-10 bg-[#05B280]/[0.8] absolute right-2 top-72 rounded-full border-4 border-[#10E3A5]/[0.9] items-center justify-center'>
                         <TouchableOpacity 
                             className='z-20 w-full h-full absolute'
