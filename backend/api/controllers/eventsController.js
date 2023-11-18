@@ -10,6 +10,32 @@ const getEvents = async (req, res) => {
     }
 }
 
+const getEventById = async (req, res) => {
+    try {
+        const body = req.body;
+
+        const {
+            eventId,
+        } = body;
+
+        if(!eventId){
+            return res.send({message: 'Missing eventId'});
+        }
+
+        const event = await Event.findOne({_id: eventId});
+
+        if(!event){
+            return res.send({message: 'Event not found'});
+        }
+
+        res.send({message: 'Event found!', data: event});
+    } catch (e) {
+        console.log(e);
+        res.send({message: 'Internal Server Error'});
+    }
+
+}
+
 const createEvent = async (req, res) => {
     try {
         const body = req.body;
@@ -70,7 +96,55 @@ const createEvent = async (req, res) => {
     }
 }
 
+const updateEvent = async (req, res) => {
+    try {
+        const body = req.body;
+
+        const {
+            eventId,
+        } = body;
+
+        if(!eventId){
+            return res.send({message: 'Missing eventId'});
+        }
+
+        const event = await Event.updateOne({_id: eventId}, {
+            $set: body,
+            $currentDate: { updatedAt: true }
+        });
+
+        return res.send({message: 'Success', data: event});
+    } catch (e){
+        res.status(500).json({message: e.message});
+    }
+
+}
+
+const deleteEvent = async (req, res) => {
+    try {
+        const body = req.body;
+
+        const {
+            eventId,
+        } = body;
+
+        if(!eventId){
+            return res.send({message: 'Missing eventId'});
+        }
+
+        const event = await Event.deleteOne({_id: eventId});
+
+        return res.send({message: 'Success', data: event});
+    } catch (e){
+        res.status(500).json({message: e.message});
+    }
+
+}
+
 module.exports = {
     getEvents,
-    createEvent
+    getEventById,
+    createEvent,
+    updateEvent,
+    deleteEvent,
 }
