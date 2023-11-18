@@ -15,6 +15,8 @@ app.use('*', cloudinaryConfig);
 
 require('./config/socketio.js');
 
+/* crons */
+require('./jobs/shopJob.js');
 
 const api = require('./api/index.js');
 
