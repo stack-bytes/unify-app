@@ -16,18 +16,6 @@ import { UserContext } from "../../contexts/UserContext";
 
 export default function MapScreen({navigation}){
     const [markers, setMarkers] = useState([
-        {
-            coords: {
-                latitude: 37.78825,
-                longitude: -122.4324
-            }
-        },
-        {
-            coords: {
-                latitude: 45.78825,
-                longitude: -122.4324
-            }
-        },
     ]);
 
     const [focusedMarkerIndex, setFocusedMarkerIndex] = useState(-1);
@@ -40,7 +28,6 @@ export default function MapScreen({navigation}){
             .then(data => {
                 setMarkers(data);
             })
-            
         setFocusedMarkerIndex(-1);
     }, []);
 
@@ -49,30 +36,36 @@ export default function MapScreen({navigation}){
             <MapView
                 className='w-full h-full absolute'
             >
-                {markers.map((marker, index) => (
-                    <Marker
-                        key={index}
-                        coordinate={{
-                            latitude: Number(marker.location.latitude),
-                            longitude: Number(marker.location.longitude),
-                        }}
-                        title={marker.title}
-                        description={marker.description}
-                        onPress={() => setFocusedMarkerIndex(index)}
-                    >
-                        <CustomMarker focused={focusedMarkerIndex==index}/>
-                    </Marker>
-                ))}
+                {
+                markers.map((marker, index) => {
+                    console.log(marker);
+                    return (
+                        <Marker
+                            key={index}
+                            coordinate={marker.location}
+                            title={marker.title}
+                            description={marker.description}
+                            onPress={() => setFocusedMarkerIndex(index)}
+                            style={{
+                                zIndex: 30,
+                                width: 30,
+                                height: 30
+                            }}
+                        >
+                            <CustomMarker focused={focusedMarkerIndex == index}/>
+                        </Marker>
+                    )
+                })}
             </MapView>
             {
                 focusedMarkerIndex != -1 &&     
                     <View className='top-20 justify-center items-center'>
-                        <EventBillboard/>
+                        <EventBillboard setFocusedMarkerIndex={setFocusedMarkerIndex}/>
                     </View>
             }
             {
                 user.currentEvent && (
-                    <View className='w-16 h-16 z-10 bg-[#05B280]/[0.8] absolute right-2 top-44 rounded-full border-4 border-[#10E3A5]/[0.9] items-center justify-center'>
+                    <View className='w-16 h-16 z-10 bg-[#05B280]/[0.8] absolute right-2 top-72 rounded-full border-4 border-[#10E3A5]/[0.9] items-center justify-center'>
                         <TouchableOpacity 
                             className='z-20 w-full h-full absolute'
                             onPress={() => navigation.getParent('MainStack').navigate('CameraScreen')}
