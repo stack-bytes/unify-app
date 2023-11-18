@@ -26,10 +26,13 @@ export default function ProfileScreen({navigation}){
             <ImageBackground source={GradientBlue} className='w-full h-full flex flex-col items-center justify-start'>
             <View className='w-full h-full p-2 flex flex-col items-center justify-start'>
                     <View className='w-[250px] h-[250px] mt-20'>
+                        <TouchableOpacity onPress={()=>navigation.getParent('ProfileStack').navigate("UserSettingsScreen")}>
                         <Image 
                             source={{uri: "https://imgs.search.brave.com/8kGu884s4LEEEGG8fdg0GUhcEAsIFbXE6bzj1HSdnB0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jb250/ZW50LmZvcnR1bmUu/Y29tL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDIzLzExL0FQMjMz/MTI3MjYyNTU3MjIt/ZTE2OTk0NzczMTI3/NDguanBnP3c9MTQ0/MCZxPTc1"}}
                             className='w-full h-full rounded-full border-8 border-bg-light'
                         />
+                        </TouchableOpacity>
+                        
                         <View className='absolute rounded-full w-10 h-10 bottom-5 right-2 bg-bg-dark flex justify-center items-center'>
                             <View className='rounded-full w-8 h-8 bg-primary'/>
                         </View>

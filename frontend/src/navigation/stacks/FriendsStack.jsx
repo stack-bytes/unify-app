@@ -15,7 +15,7 @@ export const FriendsStack = ({navigation}) => {
       screenOptions={{
         detachPreviousScreen: false,
       }}
-      id='MainStack'
+      id='FriendsStack'
       >
 
       <Stack.Screen name="FriendsScreen" component={FriendsScreen} options={{
