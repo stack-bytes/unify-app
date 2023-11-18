@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+
 const {Award} = require('../../models/award-model');
 const {User} = require('../../models/user-model')
 
@@ -25,6 +28,18 @@ const userBuyAward = async (req, res) => {
 }
 
 
+const getDailyShop = (req, res) => {
+    try{
+        const dailyAwards = fs.readFileSync( path.join(__dirname, '..', '..', 'data', 'dailyShop.json'), 'utf8');
+        const jsonedAwards = JSON.parse(dailyAwards);
+        res.status(200).json(jsonedAwards);
+    } catch (err) {
+        console.log("could not add award -> ", err)
+        res.status(500);
+    }
+}
+
 module.exports = {
     userBuyAward,
+    getDailyShop
 }
