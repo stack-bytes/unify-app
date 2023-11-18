@@ -6,7 +6,7 @@ export const UserProvider = ({children}) => {
     const [user, setUser] = useState({
         id: 1,
         username: 'johndoe',
-        pfp: 'https://picsum.photos/200/300',
+        pfp: 'https://res.cloudinary.com/dvbzt3rq8/image/upload/f_auto,q_auto/glqdszt99rlzgwkdwo93',
         currentEvent: null,
         location: null,
         ghostMode: false,
@@ -28,6 +28,14 @@ export const UserProvider = ({children}) => {
         })
     }
 
+    const setLocation = (location) => {
+        console.log(location)
+        setUser({
+            ...user,
+            location: location
+        })
+    }
+
     return (
         <UserContext.Provider value={{
             user,
@@ -36,6 +44,7 @@ export const UserProvider = ({children}) => {
             setCurrentEvent,
             isInEventCreatingMode,
             setIsInEventCreatingMode,
+            setLocation
         }}>
             {children}
         </UserContext.Provider>
