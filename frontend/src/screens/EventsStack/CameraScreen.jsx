@@ -24,6 +24,28 @@ export const CameraScreen = ({navigation}) => {
         }
       }
     }
+    
+    const postPhoto = async () => {
+      try {
+        const formData = new FormData();
+        formData.append('photo', {
+          uri: image,
+          type: 'image/jpg',
+          name: 'test'
+        })
+        fetch('http://172.20.10.8:4949/api/photos/postPhoto', {
+          method: "POST",
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          body: formData,
+        });
+
+        navigation.goBack();
+      } catch (e) {
+        console.log(e);
+      }
+    }
     useEffect(() => {
       (async () => {
         const { status } = await Camera.requestCameraPermissionsAsync();
@@ -76,7 +98,7 @@ export const CameraScreen = ({navigation}) => {
                 </TouchableOpacity>
                 <TouchableOpacity
                   className='w-32 h-10 bg-primary/[0.17] border-2 border-primary/[0.93] rounded-2xl items-center justify-center flex'
-                  onPress={takePhoto}
+                  onPress={postPhoto}
                 >
                   <Text 
                     className='text-base text-text'
