@@ -110,7 +110,7 @@ export const NavigationBar = ({navigation}) => {
                 }}
             />
             <Tab.Screen 
-                name="EventsScreen" 
+                name="EventsStack" 
                 component={EventStack} 
                 options={{
                     tabBarShowLabel: false,
