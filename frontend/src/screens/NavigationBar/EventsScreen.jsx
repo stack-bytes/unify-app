@@ -9,6 +9,8 @@ import ArrowIcon from "../../../assets/icons/arrow-icon.svg";
 import { TrendingIcon } from "../../components/trendingIcon";
 import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
+import { DeleteModal } from "../../components/modals/deleteModal";
+import { NotificationModal } from "../../components/modals/notificationModal";
 
 const data = [
     {
@@ -52,6 +54,7 @@ export default function EventsScreen({navigation}){
     const {user, toggleGhostMode} = useContext(UserContext);
     return (
         <View className='w-full h-full bg-bg-dark'>
+            <DeleteModal />
             <ImageBackground 
                 className='w-full h-full absolute'
                 source={GradientGreen}
