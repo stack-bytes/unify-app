@@ -20,13 +20,17 @@ export const EventStack = ({navigation}) => {
       }}
       id='MainStack'
       >
+      <Stack.Screen name="EventsScreen" component={EventsScreen} options={{
+           headerShown: false, 
+           gestureEnabled: false,
+      }}/>
 
       <Stack.Screen name="CameraScreen" component={CameraScreen} options={{
            headerShown: false, 
            gestureEnabled: false,
       }}/>
 
-      <Stack.Screen name="EventInfoScreen" component={GroupsScreen} options={{
+      <Stack.Screen name="EventInfoScreen" component={EventInfoScreen} options={{
         headerShown: false, 
         gestureEnabled: false,
       }}/>

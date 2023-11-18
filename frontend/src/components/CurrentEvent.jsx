@@ -30,7 +30,7 @@ export const CurrentEvent = ({navigation}) => {
                             <Text style={{fontFamily: 'IBMPlexSans_700Bold'}} className="pl-2 text-xl text-white">Leave Event</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity className="w-[50%] h-[100%] bg-[#F5C211]/[0.71] border-2 border-[#F5C211]/[1] rounded-br-md flex flex-row items-center justify-center">
+                    <TouchableOpacity onPress = {()=>navigation.navigate("EventInfoScreen")} className="w-[50%] h-[100%] bg-[#F5C211]/[0.71] border-2 border-[#F5C211]/[1] rounded-br-md flex flex-row items-center justify-center">
                         <View className='flex-row items-center'>
                             <InfoIcon className='100%' fill='white'/>
                             <Text style={{fontFamily: 'IBMPlexSans_700Bold'}} className="pl-2 text-xl text-white">Info</Text>
