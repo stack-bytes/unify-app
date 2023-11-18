@@ -16,6 +16,8 @@ import { Avatar } from "../components/user/avatar";
 import ShopScreen from "../screens/NavigationBar/ShopScreen";
 import EventsScreen from "../screens/NavigationBar/EventsScreen";
 
+import { FriendsStack } from "./stacks/FriendsStack";
+
 const Tab = createBottomTabNavigator();
 
 export const NavigationBar = ({navigation}) => {
@@ -32,7 +34,7 @@ export const NavigationBar = ({navigation}) => {
                     zIndex: 20,
                     position: 'absolute',
                     bottom: 35,
-                    backgroundColor: 'rgba(14, 13, 13, 0.27)',
+                    backgroundColor: 'rgba(14, 13, 13, 0.77)',
                     borderRadius: 16,
                     borderWidth: 2,
                     borderTopWidth: 2,
@@ -128,7 +130,7 @@ export const NavigationBar = ({navigation}) => {
             />
             <Tab.Screen 
                 name="FriendsScreen" 
-                component={MapScreen} 
+                component={FriendsStack} 
                 options={{
                     tabBarShowLabel: false,
                     headerShown: false,
