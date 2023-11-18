@@ -1,9 +1,21 @@
-import {Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 
-export const GenericButton = ({buttonText, backgroundColor, textColor}) => {
+export const GenericButton = ({buttonText, backgroundColor, textColor, borderColor, SvgIcon, SvgIconColor, onPress}) => {
     return (
-        <TouchableOpacity style = {[styles.container, {backgroundColor: backgroundColor ? backgroundColor : 'black'}]}>
-            <Text style = {[styles.text]}>{buttonText}</Text>
+        <TouchableOpacity 
+            style = {[styles.container, {backgroundColor: backgroundColor ? backgroundColor : 'black'}, {borderColor: borderColor ? borderColor : 'blue'}]}
+            onPress={onPress}
+        >
+           
+            <View className = 'flex-row gap-x-3 justify-center items-center'>
+                {SvgIcon ? <SvgIcon fill={SvgIconColor ? SvgIconColor : 'white'} /> : null}
+                
+                <Text style = {[styles.text,
+                    {color: textColor ? textColor : 'white'}]}>
+                    {buttonText}
+                </Text> 
+            </View>
+            
         </TouchableOpacity>
     )
     
@@ -11,11 +23,11 @@ export const GenericButton = ({buttonText, backgroundColor, textColor}) => {
 
 const styles = StyleSheet.create({
     container: {
+        marginTop: 10,
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 4,
+        borderRadius: 8,
         borderWidth: 1,
-        borderColor: '#10E3A5',
         flexDirection: 'row',
         elevation: 3,
         backgroundColor:'black',
