@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { NavigationBar } from './NavigationBar';
-
+import { AuthStack } from './AuthStack';
 import PronounsScreen from '../screens/ProfileStack/PronounsScreen';
 
 const Stack = createStackNavigator();
@@ -23,7 +23,7 @@ export const MainStack = ({ navigation }) => {
            gestureEnabled: false,
       }}/>
 
-      <Stack.Screen name="PronounsScreen" component={PronounsScreen} options={{
+      <Stack.Screen name="AuthStack" component={AuthStack} options={{
         headerShown: false, 
         gestureEnabled: false,
       }}/>

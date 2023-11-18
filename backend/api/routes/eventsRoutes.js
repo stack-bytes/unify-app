@@ -9,5 +9,7 @@ router.get('/getEventById', controller.getEventById);
 router.post('/createEvent', controller.createEvent);
 router.patch('/updateEvent', controller.updateEvent);
 router.delete('/deleteEvent', controller.deleteEvent);
+router.get('/getMarkers', controller.getMarkers);
+
 
 module.exports = router;

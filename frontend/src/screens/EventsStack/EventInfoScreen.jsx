@@ -2,8 +2,11 @@ import {View, Image, TouchableOpacity, Text, ImageBackground, FlatList} from 're
 import GradientGreen from '../../../assets/backgrounds/GradientGreen.png';
 
 import { CurrentEvent } from '../../components/CurrentEvent';
+import { UserContext } from '../../contexts/UserContext';
 
-export const EventInfoScreen = ({navigation}) => {
+import { useContext, useState, useEffect } from 'react';
+
+export const EventInfoScreen = ({navigation, eventId}) => {
     const data = [
         { id: '1', text: 'Item 1' },
         { id: '2', text: 'Item 2' },
@@ -15,6 +18,13 @@ export const EventInfoScreen = ({navigation}) => {
         { id: '8', text: 'Item 8' },
         { id: '9', text: 'Item 9' },    
     ];
+
+    const {user} = useContext(UserContext);
+
+    useEffect(() =>{
+        
+    },[]);
+
 
     return(
         <>

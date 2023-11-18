@@ -10,6 +10,16 @@ const getEvents = async (req, res) => {
     }
 }
 
+const getMarkers = async (req, res) => {
+    try {
+        const markers = await Event.find({}, {location: 1});
+        res.send(markers);
+    } catch (e) {
+        console.log(e);
+        res.send({message: 'Internal Server Error'});
+    }
+}
+
 const getEventById = async (req, res) => {
     try {
         const body = req.body;
@@ -147,4 +157,5 @@ module.exports = {
     createEvent,
     updateEvent,
     deleteEvent,
+    getMarkers
 }

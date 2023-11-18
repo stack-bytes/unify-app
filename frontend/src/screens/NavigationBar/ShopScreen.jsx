@@ -1,33 +1,26 @@
-import { FlatList, Image, Text, View } from "react-native";
-
+import { FlatList, Image, Text, View, TouchableOpacity } from "react-native";
+import { useEffect, useState } from "react";
 
 import GradientBlue from '../../../assets/backgrounds/GradientBlue.png';
 import ChestIcon from '../../../assets/shopItems/chest-icon.svg';
 
-const data = [
-    {
-        name: 'Mistery Crate',
-        points: 100,
-        icon: 'https://mongodb-js.github.io/leaf/mongodb-leaf_512x512.png',
-    },
-    {
-        name: 'Mistery test',
-        points: 100,
-        icon: 'https://cdn-icons-png.flaticon.com/512/3395/3395949.png',
-    },
-    {
-        name: 'Mistery 43',
-        points: 100,
-        icon: 'https://mongodb-js.github.io/leaf/mongodb-leaf_512x512.png',
-    },
-    {
-        name: 'Mistery gad',
-        points: 100,
-        icon: 'https://mongodb-js.github.io/leaf/mongodb-leaf_512x512.png',
-    }
-]
+
+import {SERVER_IP} from '../../../settings.json'
+
+
+
 
 export default function ShopScreen({navigation}){
+    const [data, setData] = useState([])
+    
+    
+    useEffect(()=> {
+        fetch(`${SERVER_IP}:4949/api/awards/getDailyShop`)
+        .then(res => res.json())
+        .then((res) => {setData(res)})
+    },[])
+
+
     return (
         <View className='w-full h-full'>
             <Image 
@@ -47,11 +40,12 @@ export default function ShopScreen({navigation}){
                             style={{fontFamily: 'SpaceGrotesk_500Medium'}}
                             className='text-text text-2xl'
                         >
-                            1k p
+                            1000p
                         </Text>
                     </View>
                 </View>
-                <View className='w-[80%] h-72'>
+                <TouchableOpacity className="w-[80%] h-72 flex flex-row items-center justify-center">
+                <View className='w-full h-72'>
                     <View className='w-full h-[300px] bg-[#16f1e4]/[0.22] border-2 rounded-xl border-[#16F1E4]/[0.92]'>
                         <View className='w-full justify-start mt-6 ml-6'>
                             <Text
@@ -75,6 +69,8 @@ export default function ShopScreen({navigation}){
                         </View>
                     </View>
                 </View>
+                </TouchableOpacity>
+                
 
                 <View className='w-[80%] h-full'>
                     <FlatList 
@@ -84,9 +80,10 @@ export default function ShopScreen({navigation}){
                         contentContainerStyle={{flex:'column', justifyContent:'space-around'}}
                         scrollEnabled
                         renderItem={({item}) => (
-                            <View className='w-40 bg-[#121212]/[0.29] border-2 border-[#121212] h-40 rounded-xl mr-2 mt-2 items-center flex'>
+                            <TouchableOpacity>
+                                <View className='w-40 bg-[#121212]/[0.29] border-2 border-[#121212] h-40 rounded-xl mr-2 mt-2 items-center flex'>
                                 <View className='h-1/2 w-[90%] items-center mt-4'>
-                                    <View className='w-full h-18'>
+                                    <View className='w-16 h-16'>
                                         <Image 
                                             className='w-full h-full object-cover'
                                             source={{uri: item.icon}}
@@ -96,22 +93,24 @@ export default function ShopScreen({navigation}){
                                     <View>
                                         <Text
                                             style={{fontFamily: 'SpaceGrotesk_500Medium'}}
-                                            className='text-text text-xl text-center'
+                                            className='text-text text-md text-center pb-3'
                                         >
                                             {item.name}
                                         </Text>
                                     </View>
                                 </View>
 
-                                <View className='absolute bottom-2 right-2 border-[#121212] border-2 rounded-xl w-14 h-6 justify-center items-center flex'>
+                                <View className='absolute bottom-1 right-2 border-[#121212] border-2 rounded-xl w-14 h-6 justify-center items-center flex'>
                                     <Text 
                                         className='text-text text-sm'
                                         style={{fontFamily: 'SpaceGrotesk_300Light'}}
                                     >
-                                        {item.points}p
+                                        {item.price}p
                                     </Text>
                                 </View>
                             </View>
+                            </TouchableOpacity>
+                            
                         )}
                     />
                 </View>

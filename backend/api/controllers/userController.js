@@ -128,10 +128,31 @@ const updateUser = async (req, res) => {
     }
 }
 
+
+const getUserFriends = async (req, res) => {
+    try{
+      const userId = req.query.userId;
+      const user = await User.findById(userId);
+      const userFriendsIds = user.friends;
+      let userFriends = [];
+  
+      for (const friendId of userFriendsIds) {
+        const foundFriend = await User.findById(friendId);
+        userFriends.push(foundFriend);
+      }
+  
+      res.status(200).json(userFriends); 
+    } catch (err) {
+      console.error('Error fetching user friends:', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+  
 module.exports = {
     getUsers,
     getUserById,
     createUser,
     deleteUser,
-    updateUser
+    updateUser,
+    getUserFriends,
 }
