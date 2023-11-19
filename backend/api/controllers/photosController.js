@@ -55,7 +55,7 @@ const postPhoto = async (req, res) => {
                     userId: req.body.userId,
                 })
 
-                res.send({message: "Photo uploaded!", data: newPhoto});
+                res.send({data: newPhoto});
             } else {
                 res.status(500);
             }

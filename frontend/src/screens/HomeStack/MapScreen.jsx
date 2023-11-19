@@ -14,6 +14,8 @@ import {SERVER_IP} from '../../../settings.json'
 import CameraIcon from '../../../assets/icons/camera-icon.svg';
 import { UserContext } from "../../contexts/UserContext";
 
+import * as Location from 'expo-location';
+
 export default function MapScreen({navigation}){
     const [markers, setMarkers] = useState([
     ]);
@@ -27,7 +29,22 @@ export default function MapScreen({navigation}){
         longitudeDelta: 0.0421,
     });
 
-    const { user, isInEventCreatingMode, setIsInEventCreatingMode } = useContext(UserContext);
+    const { user, setLocation, isInEventCreatingMode, setIsInEventCreatingMode } = useContext(UserContext);
+
+    useEffect(() => {
+        (async () => {
+          
+          let { status } = await Location.requestForegroundPermissionsAsync();
+          if (status !== 'granted') {
+            setErrorMsg('Permission to access location was denied');
+            return;
+          }
+    
+          let location = await Location.getCurrentPositionAsync({});
+          setLocation(location);
+          console.log(location);
+        })();
+      }, []);
 
     useEffect(() => {
         fetch(`${SERVER_IP}:4949/api/events/getMarkers`)
@@ -44,22 +61,6 @@ export default function MapScreen({navigation}){
                 className='w-full h-full absolute'
                 onRegionChangeComplete={region => setMapCoords(region)}
             >
-<<<<<<< HEAD
-                {markers.map((marker, index) => (
-                    <Marker
-                        key={index}
-                        coordinate={{
-                            latitude: 0,
-                            longitude: 0
-                        }}
-                        title={marker.title}
-                        description={marker.description}
-                        onPress={() => setFocusedMarkerIndex(index)}
-                    >
-                        <CustomMarker focused={focusedMarkerIndex==index}/>
-                    </Marker>
-                ))}
-=======
                 {
                 markers.map((marker, index) => {
                     return (
@@ -79,21 +80,21 @@ export default function MapScreen({navigation}){
                         </Marker>
                     )
                 })}
-                {
-                    isInEventCreatingMode &&
-                        <Marker
-                            coordinate={mapCoords}
-                            title='New Event'
-                            style={{
-                                zIndex: 30,
-                                width: 30,
-                                height: 30
-                            }}
-                        >
-
-                        </Marker>
-                }
->>>>>>> main
+                <Marker
+                    coordinate={user.location?.coords}
+                    title='You'
+                    style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                >
+                    <View className='w-10 h-10'>
+                        <Image
+                            className='w-full h-full absolute rounded-full border-primary border-2'
+                            source={{uri: user.pfp}}
+                        />
+                    </View>
+                </Marker>
             </MapView>
             {
                 focusedMarkerIndex != -1 &&     
@@ -102,7 +103,7 @@ export default function MapScreen({navigation}){
                     </View>
             }
             {
-                user.currentEvent && (
+                (
                     <View className='w-16 h-16 z-10 bg-[#05B280]/[0.8] absolute right-2 top-72 rounded-full border-4 border-[#10E3A5]/[0.9] items-center justify-center'>
                         <TouchableOpacity 
                             className='z-20 w-full h-full absolute'
@@ -112,53 +113,7 @@ export default function MapScreen({navigation}){
                     </View>
                 )
             }
-            {
-                isInEventCreatingMode && 
-                <>
-                    <View className='absolute top-20 w-full items-center gap-y-3'>
-                        <View className='rounded-2xl bg-primary/[0.9] border-2 border-[#10C3A5]/[0.4] w-3/4 h-16 items-center justify-center'>
-                            <Text
-                                className='text-text text-3xl text-center'
-                                style={{fontFamily: 'IBMPlexSans_700Bold'}}
-                            >
-                                CREATING EVENT
-                            </Text>
-                        </View>
-                        <TouchableOpacity 
-                            className='rounded-2xl bg-red-700/[0.95] border-2 border-red-950/[0.8] w-1/3 h-9 items-center justify-center'
-                            onPress={() => setIsInEventCreatingMode(false)}
-                        >
-                            <Text
-                                className='text-text text-2xl text-center'
-                                style={{fontFamily: 'IBMPlexSans_700Bold'}}
-                            >
-                                CANCEL
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-
-                    <View className='absolute bottom-36 w-full items-center'>
-                        <TouchableOpacity 
-                            className='rounded-2xl bg-primary border-2 border-red-950/[0.2] w-1/3 h-10 items-center justify-center'
-                            onPress={() => {
-                                navigation.getParent('NavigationBar').navigate('EventStack', {
-                                    screen: 'CreateEventScreen',
-                                    params: {
-                                        mapCoords: mapCoords
-                                    }
-                                })
-                            }}
-                        >
-                            <Text
-                                className='text-text text-xl text-center'
-                                style={{fontFamily: 'IBMPlexSans_700Bold'}}
-                            >
-                                CONTINUE
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                </>
-            }
+        
         </View>
     )
 }

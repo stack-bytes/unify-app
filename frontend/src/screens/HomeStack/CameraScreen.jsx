@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { Camera } from 'expo-camera';
 
@@ -7,12 +7,15 @@ import TrashIcon from '../../../assets/icons/trash-icon.svg';
 import LocationIcon from '../../../assets/icons/location-icon.svg';
 import FlagIcon from '../../../assets/icons/flag-icon.svg';
 import ArrowIcon from '../../../assets/icons/arrow-icon.svg';
+import { UserContext } from '../../contexts/UserContext';
 
 export const CameraScreen = ({navigation, route}) => {
     const [hasPermission, setHasPermission] = useState(null);
     const [type, setType] = useState(Camera.Constants.Type.back);
     const [image, setImage] = useState(null);
     const cameraRef = useRef(null);
+
+    const { user } = useContext(UserContext);
   
     const takePhoto = async () => {
       if(cameraRef){
@@ -73,6 +76,7 @@ export const CameraScreen = ({navigation, route}) => {
   
     return (
       <View className='flex items-center w-full h-full'>
+        { user.currentEvent && (
         <View className='w-full h-40 absolute top-20 bg-transparent z-30 items-center justify-start p-5 gap-y-2'>
           <View className='h-8 w-full flex-row items-center justify-center gap-x-1'>
             <LocationIcon height='100%' fill='white'/>
@@ -80,7 +84,7 @@ export const CameraScreen = ({navigation, route}) => {
               style={{fontFamily: 'SpaceGrotesk_300Light'}}
               className='text-text text-xl'
             >
-              Universitate
+              {user.currentEvent.location}
             </Text>
           </View>
 
@@ -90,12 +94,13 @@ export const CameraScreen = ({navigation, route}) => {
               style={{fontFamily: 'SpaceGrotesk_700Bold'}}
               className='text-text text-5xl'
             >
-              Hackathon
+              {user.currentEvent.name}
             </Text>
           </View>
         </View>
+        )}
         {
-          image ?
+          image ? (
             <View className='w-full h-full absolute z-20'>
               <View className='w-full h-full absolute opacity-30 bg-bg-dark z-10'/>
               <Image source={{uri: image}} className='w-full h-full absolute' />
@@ -109,7 +114,7 @@ export const CameraScreen = ({navigation, route}) => {
                 </TouchableOpacity>
                 <TouchableOpacity
                   className='w-32 h-10 bg-primary/[0.17] border-2 border-primary/[0.93] rounded-2xl items-center justify-center flex'
-                  onPress={postPhoto}
+                  onPress={user.currentEvent ? postPhoto : () => navigation.getParent().navigate('EventStack', {screen: 'CreateEventScreen'})}
                 >
                   <Text 
                     className='text-base text-text'
@@ -117,12 +122,13 @@ export const CameraScreen = ({navigation, route}) => {
                       fontFamily: 'IBMPlexSans_700Bold'
                     }}
                   >
-                    Post Photo
+                    {user.currentEvent ? 'Post Photo' : 'Create Event'}
                   </Text>
                 </TouchableOpacity>
 
               </View>
             </View>
+          )
           :
             <View className='absolute w-full h-20 items-center z-20 bottom-20 flex-row justify-center'>
               <TouchableOpacity

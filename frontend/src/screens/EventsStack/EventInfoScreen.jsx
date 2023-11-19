@@ -20,7 +20,7 @@ export const EventInfoScreen = ({navigation, eventId}) => {
 =======
 export const EventInfoScreen = ({navigation, route}) => {
     const data = [
-        { id: '1', text: 'davidphex', photo: 'https://res.cloudinary.com/dvbzt3rq8/image/upload/f_auto,q_auto/glqdszt99rlzgwkdwo93' },
+        { id: '1', username: 'davidphex', photo: 'https://res.cloudinary.com/dvbzt3rq8/image/upload/f_auto,q_auto/glqdszt99rlzgwkdwo93' },
         { id: '2', text: 'Item 2' },
         { id: '3', text: 'Item 3' },
         { id: '4', text: 'Item 4' },
@@ -31,23 +31,15 @@ export const EventInfoScreen = ({navigation, route}) => {
         { id: '9', text: 'Item 9' },    
     ];
 
-    const [eventData, setEventData] = useState(null);
-    const [photos, setPhotos] = useState(null);
+    const [membersData, setMembersData] = useState([]);
+
     const {user} = useContext(UserContext);
 
     useEffect(() => {
-        fetch(`http://172.20.10.8:4949/api/events/getEventById/6558d27239638819552dd1e4`)
+        fetch(`http://172.20.10.8:4949/api/photos/getPhotosFromUsers?eventId=6558d27239638819552dd1e4`)
             .then(res => res.json())
-            .then(data => {
-                setEventData(data);
-            })
-    },[]);
-
-    useEffect(() => {
-        fetch(`http://172.20.10.8:4949/api/photos/getPhotosFromEvent/6558d27239638819552dd1e4`)
-            .then(res => res.json())
-            .then(data => {
-                setPhotos(data);
+            .then(result => {
+                setMembersData(result.data);
             })
     })
 >>>>>>> main

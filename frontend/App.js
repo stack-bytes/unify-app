@@ -36,7 +36,7 @@ const App = () => {
     <UserProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
           <NavigationContainer>
-            <Root.Navigator initialRouteName='AuthStack' id='Root'>
+            <Root.Navigator initialRouteName='MainStack' id='Root'>
               <Root.Screen name="MainStack" component={MainStack} options={{ headerShown: false}}/>
               <Root.Screen name="AuthStack" component={AuthStack} options={{ headerShown: false }} />
             </Root.Navigator>
