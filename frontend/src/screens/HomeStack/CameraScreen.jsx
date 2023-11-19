@@ -9,6 +9,8 @@ import FlagIcon from '../../../assets/icons/flag-icon.svg';
 import ArrowIcon from '../../../assets/icons/arrow-icon.svg';
 import { UserContext } from '../../contexts/UserContext';
 
+import {SERVER_IP} from '../../../settings.json';
+
 export const CameraScreen = ({navigation, route}) => {
     const [hasPermission, setHasPermission] = useState(null);
     const [type, setType] = useState(Camera.Constants.Type.back);
@@ -37,13 +39,19 @@ export const CameraScreen = ({navigation, route}) => {
           type: 'image/jpg',
           name: 'test'
         })
-        fetch('http://172.20.10.8:4949/api/photos/postPhoto', {
+        formData.append('eventId', user.currentEvent._id)
+        formData.append('userId', user.id)
+
+        fetch(`${SERVER_IP}:4949/api/photos/postPhoto`, {
           method: "POST",
           headers: {
             "Content-Type": "multipart/form-data",
           },
           body: formData,
-        });
+        }).then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        })
 
         navigation.getParent().navigate('HomeStack', {
           screen: 'MapScreen'

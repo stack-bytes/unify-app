@@ -2,6 +2,7 @@ import {View, Image, TouchableOpacity, Text, ImageBackground, FlatList} from 're
 import GradientGreen from '../../../assets/backgrounds/GradientGreen.png';
 
 import StarIcon from '../../../assets/icons/star-icon.svg';
+import ArrowIcon from '../../../assets/icons/arrow-icon.svg';
 
 import { CurrentEvent } from '../../components/CurrentEvent';
 import { UserContext } from '../../contexts/UserContext';
@@ -23,11 +24,10 @@ export const EventInfoScreen = ({navigation, route}) => {
         (async () => {
             fetch(`${SERVER_IP}:4949/api/photos/getPhotosFromUsers?eventId=${route.params.event._id}`)
             .then(res => res.json())
-            .then(result => {
-                console.log(result.data);
+            .then(result  => {
                 setMembersData(result.data);
-                setEventData(getEventById(route.params.event._id));
             });
+            setEventData(route.params.event);
         })();
     },[]);
 
@@ -40,6 +40,20 @@ export const EventInfoScreen = ({navigation, route}) => {
                     className='w-full h-full absolute'
                     source={GradientGreen}
                 />
+
+                <TouchableOpacity 
+                    className='w-16 h-16 absolute left-4 top-8 z-40'
+                    onPress={() => navigation.goBack()}
+                >
+                    <ArrowIcon 
+                        height='150%' width='50%' fill='white'
+                        style={{
+                            transform : [
+                                {rotate: '90deg'}
+                            ]
+                        }}
+                    />
+                </TouchableOpacity>
 
                 <View className='w-full h-10 justify-center items-center mt-16'>
                     <View>
@@ -57,7 +71,12 @@ export const EventInfoScreen = ({navigation, route}) => {
                     <EventBillboard 
                         navigation={navigation}
                         event={route.params.event}
-                        CustomButton={ShareButton}
+                        CustomButton={
+                            user.currentEvent && user.currentEvent._id === route.params.event._id ? 
+                                ShareButton
+                            :
+                                null
+                        }//check if user is in event
                     />
                 </View>
 
@@ -114,6 +133,7 @@ export const EventInfoScreen = ({navigation, route}) => {
                                             eventData && item.id === eventData.organizer &&
                                             <StarIcon 
                                                 style={{
+                                                    zIndex: 10,
                                                     position: 'absolute',
                                                     bottom: 0,
                                                     right: 0,

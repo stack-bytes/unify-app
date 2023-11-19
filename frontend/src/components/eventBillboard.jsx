@@ -82,7 +82,7 @@ export const EventBillboard = ({navigation, setFocusedMarkerIndex, event, Custom
                         {
                             CustomButton ? <CustomButton />
                             :
-                            (user.currentEvent ? (
+                            (user.currentEvent && user.currentEvent._id === event._id ? (
                                 <TouchableOpacity 
                                     onPress = {navigateToEventInfo}
                                     className="w-full h-[100%] bg-[#F5C211]/[0.71] border-2 border-[#F5C211]/[1] rounded-br-md flex flex-row items-center justify-center"
@@ -101,7 +101,14 @@ export const EventBillboard = ({navigation, setFocusedMarkerIndex, event, Custom
                                     </View>
 
                                 </TouchableOpacity>
-                            ) : (
+                            ) : (user.currentEvent ? ((
+                                <View className='w-full h-full bg-bg-light/[0.7] justify-center items-center border-2 border-bg-dark/[0.4] rounded-br-md'>
+                                    <Text style={{fontFamily: 'IBMPlexSans_700Bold'}} className="pl-2 text-xl text-text">
+                                        Leave event first
+                                    </Text>
+                                </View>
+                                
+                            )): (
                                 <TouchableOpacity 
                                     className="w-[100%] rounded-br-md h-[100%] flex flex-row items-center justify-center bg-[#19C391]/[0.9] border-2 border-primary/[0.1]  rounded-bl-md"
                                     onPress={joinEvent}
@@ -111,7 +118,7 @@ export const EventBillboard = ({navigation, setFocusedMarkerIndex, event, Custom
                                         <Text style={{fontFamily: 'IBMPlexSans_700Bold'}} className="pl-2 text-xl text-white">Join Event</Text>
                                     </View>
                                 </TouchableOpacity>
-                            ))
+                            )))
                         }
                     </>
                 )
