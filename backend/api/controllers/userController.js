@@ -1,4 +1,5 @@
 const { User } = require('../../models/user-model');
+const {Event} = require('../../models/event-model');
 
 const getUsers = async (req, res) => {
     try {
@@ -147,6 +148,22 @@ const getUserFriends = async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+
+const addUserToEvent = async (req, res) => {
+    try{
+        const eventId = req.query.eventId;
+        const userId = req.query.userId;
+
+        const event = await Event.findById(eventId);
+
+
+        event.members.push(userId);
+        event.save();
+    } catch (err){
+        console.error('Error adding user to event:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
   
 module.exports = {
     getUsers,
@@ -155,4 +172,5 @@ module.exports = {
     deleteUser,
     updateUser,
     getUserFriends,
+    addUserToEvent, 
 }
