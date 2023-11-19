@@ -5,7 +5,7 @@ import InfoIcon from '../../assets/icons/info-icon.svg';
 import { useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
 
-export const EventBillboard = ({navigation, setFocusedMarkerIndex, event}) => {
+export const EventBillboard = ({navigation, setFocusedMarkerIndex, event, CustomButton}) => {
     const { user, setCurrentEvent } = useContext(UserContext); 
 
     const navigateToEventInfo = () => {
@@ -51,17 +51,21 @@ export const EventBillboard = ({navigation, setFocusedMarkerIndex, event}) => {
                 <LiveStreamingSvg/>
             </View>
 
-            <TouchableOpacity 
-                className='absolute right-0 top-0 w-10 h-10 z-40'
-                onPress={() => setFocusedMarkerIndex(-1)}
-            >
-                <Text 
-                    className='text-red-700 text-4xl text-center'
-                    style={{fontFamily: 'SpaceGrotesk_700Bold'}}
-                >
-                    x
-                </Text>
-            </TouchableOpacity>
+            {
+                setFocusedMarkerIndex ? (
+                    <TouchableOpacity 
+                        className='absolute right-0 top-0 w-10 h-10 z-40'
+                        onPress={() => setFocusedMarkerIndex(-1)}
+                    >
+                        <Text 
+                            className='text-red-700 text-4xl text-center'
+                            style={{fontFamily: 'SpaceGrotesk_700Bold'}}
+                        >
+                            x
+                        </Text>
+                    </TouchableOpacity>
+                ) : null
+            }
 
 
             <Image 
@@ -74,8 +78,11 @@ export const EventBillboard = ({navigation, setFocusedMarkerIndex, event}) => {
                 {
                     (
                     <>
+
                         {
-                            user.currentEvent ? (
+                            CustomButton ? <CustomButton />
+                            :
+                            (user.currentEvent ? (
                                 <TouchableOpacity 
                                     onPress = {navigateToEventInfo}
                                     className="w-full h-[100%] bg-[#F5C211]/[0.71] border-2 border-[#F5C211]/[1] rounded-br-md flex flex-row items-center justify-center"
@@ -104,7 +111,7 @@ export const EventBillboard = ({navigation, setFocusedMarkerIndex, event}) => {
                                         <Text style={{fontFamily: 'IBMPlexSans_700Bold'}} className="pl-2 text-xl text-white">Join Event</Text>
                                     </View>
                                 </TouchableOpacity>
-                            )
+                            ))
                         }
                     </>
                 )

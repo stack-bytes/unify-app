@@ -1,18 +1,27 @@
 import {View, Image, TouchableOpacity, Text} from 'react-native';
 import LiveStreamingSvg from '../../assets/icons/streaming.svg';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../contexts/UserContext';
 
 import LogoutIcon from '../../assets/icons/logout-icon.svg';
 import InfoIcon from '../../assets/icons/info-icon.svg';
+import {SERVER_IP} from '../../settings.json';
 
 export const CurrentEvent = ({navigation, manyButttons, joinButton, event }) => {
 
     //buttons = 'join' 
 
     const {user, setCurrentEvent} = useContext(UserContext);
-    
 
+    const [eventData, setEventData] = useState(null);
+    
+    useEffect(() => {
+        fetch(`${SERVER_IP}:4949/api/events/getEventById/${event._id}`)
+            .then(res => res.json())
+            .then(result => {
+                setEventData(result.data);
+            })
+    },[])
     const onExitPress = () => {
         setCurrentEvent(null);
     }
@@ -20,10 +29,13 @@ export const CurrentEvent = ({navigation, manyButttons, joinButton, event }) => 
     const onJoinPress = () => {
 
         setCurrentEvent(event);
+        console.log(user.currentEvent);
         navigation.getParent().navigate('EventStack', {
             screen: 'EventsScreen'
         })
     }
+
+    
     return(
             <View className="relative w-[90vw] h-[300px]  rounded-md">
                 <Text style={{fontFamily: 'SpaceGrotesk_700Bold'}} className="absolute text-text z-10 top-5 left-5 text-4xl">{event?.name}</Text>
@@ -46,13 +58,23 @@ export const CurrentEvent = ({navigation, manyButttons, joinButton, event }) => 
                             <Text style={{fontFamily: 'IBMPlexSans_700Bold'}} className="pl-2 text-xl text-white">Leave Event</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress = {()=>navigation.navigate("EventInfoScreen", {
+
+                    
+                    <TouchableOpacity onPress = {eventData && eventData.organizer == user.id ? ()=>navigation.navigate("EventInfoScreen", {
                         event: {
                             _id: user.currentEvent._id,
                             name: user.currentEvent.name,
                             location: user.currentEvent.location,
                         }
-                    })} className="w-[50%] h-[100%] bg-[#F5C211]/[0.71] border-2 border-[#F5C211]/[1] rounded-br-md flex flex-row items-center justify-center">
+                    }): 
+                        () => navigation.navigate('EventDashboardScreen', {
+                            event: {
+                                _id: user.currentEvent._id,
+                                name: user.currentEvent.name,
+                                location: user.currentEvent.location,
+                            }
+                        })
+                    } className="w-[50%] h-[100%] bg-[#F5C211]/[0.71] border-2 border-[#F5C211]/[1] rounded-br-md flex flex-row items-center justify-center">
                         <View className='flex-row items-center'>
                             <InfoIcon className='100%' fill='white'/>
                             <Text style={{fontFamily: 'IBMPlexSans_700Bold'}} className="pl-2 text-xl text-white">Info</Text>
