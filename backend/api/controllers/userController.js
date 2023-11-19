@@ -147,7 +147,7 @@ const getUserFriends = async (req, res) => {
       console.error('Error fetching user friends:', err);
       res.status(500).json({ error: 'Internal Server Error' });
     }
-};
+}; 
 
 const addUserToEvent = async (req, res) => {
     try{
@@ -158,6 +158,22 @@ const addUserToEvent = async (req, res) => {
 
 
         event.members.push(userId);
+        event.save();
+    } catch (err){
+        console.error('Error adding user to event:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+const removeUserFromEvent = async (req, res) => {
+    try{
+        const eventId = req.query.eventId;
+        const userId = req.query.userId;
+
+        const event = await Event.findById(eventId);
+
+        const userIdPosition = event.members.indexOf(userId);
+        event.members.splice(userIdPosition, 1);
         event.save();
     } catch (err){
         console.error('Error adding user to event:', err);

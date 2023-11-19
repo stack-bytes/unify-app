@@ -16,6 +16,6 @@ const shopJobFunction = async () => {
 };
 
 
-cron.schedule('*/5 * * * * *', shopJobFunction);
+cron.schedule('* 20 * * * *', shopJobFunction);
 
 
