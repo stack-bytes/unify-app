@@ -12,11 +12,14 @@ import { useContext, useState, useEffect } from 'react';
 import { getEventById } from '../../utils/events';
 import { EventBillboard } from '../../components/eventBillboard';
 import { ShareButton } from '../../components/Buttons/shareButton';
+import { useIsFocused } from '@react-navigation/native';
 
 export const EventInfoScreen = ({navigation, route}) => {
 
     const [membersData, setMembersData] = useState([]);
     const [eventData, setEventData] = useState(null);
+
+    const isFocused = useIsFocused();
 
     const { user } = useContext(UserContext);
 
@@ -29,7 +32,7 @@ export const EventInfoScreen = ({navigation, route}) => {
             });
             setEventData(route.params.event);
         })();
-    },[]);
+    },[isFocused]);
 
 
     return(

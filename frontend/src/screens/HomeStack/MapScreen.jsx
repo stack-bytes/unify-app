@@ -62,7 +62,6 @@ export default function MapScreen({navigation}){
             .then(res => res.json())
             .then(data => {
                 setEvents(data);
-                console.log(events);
             })
         setFocusedMarkerIndex(-1);
     }, [isFocused]);
@@ -75,7 +74,6 @@ export default function MapScreen({navigation}){
             >
                 {
                 events.map((marker, index) => {
-                    console.log('MARKER',marker);
                     return (
                         <Marker
                             key={index}
