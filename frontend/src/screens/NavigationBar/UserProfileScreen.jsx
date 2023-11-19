@@ -1,5 +1,5 @@
 import { ImageBackground, View ,Text,Image, FlatList } from "react-native";
-
+import { useContext } from "react";
 
 import GradientBlue from '../../../assets/backgrounds/GradientBlue.png'
 import { SpaceGrotesk_400Regular } from "@expo-google-fonts/space-grotesk";
@@ -8,18 +8,15 @@ import LiveStreamingSvg from '../../../assets/icons/streaming.svg';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import EventLine from '../../components/EventLine';
 
+import { useState } from "react";
+import { UserContext } from "../../contexts/UserContext";
+
 export default function ProfileScreen({navigation}){
-    const data = [
-    { id: '1', text: 'Item 1' },
-    { id: '2', text: 'Item 2' },
-    { id: '3', text: 'Item 3' },
-    { id: '4', text: 'Item 4' },
-    { id: '5', text: 'Item 5' },
-    { id: '6', text: 'Item 6' },
-    { id: '7', text: 'Item 7' },
-    { id: '8', text: 'Item 8' },
-    { id: '9', text: 'Item 9' },    
-];
+    
+
+    const {user} = useContext(UserContext);
+
+    const [data, setData] = useState(user.awards);
 
     return (
         <View className='w-full h-full'>
@@ -40,8 +37,18 @@ export default function ProfileScreen({navigation}){
                             <Text className='rounded-full'>👻</Text>
                         </View>
                     </View>
-                    <Text className="text-4xl mt-5 text-text" style={{fontFamily: 'SpaceGrotesk_700Bold'}}>Username</Text>
-                    <Text className="text-xl mt-1 mb-5 text-gray-400" style={{fontFamily: 'SpaceGrotesk_700Bold'}}>he / him</Text>
+                    <Text className="text-4xl mt-5 text-text" style={{fontFamily: 'SpaceGrotesk_700Bold'}}>{user.username}</Text>
+                    <View className="flex flex-row">
+                    {
+                        user.pronouns.map((pronoun, index) => {
+                            return (
+                                    <Text className="text-xl mt-1 mb-5 text-gray-400" style={{fontFamily: 'SpaceGrotesk_700Bold'}}>{index != 0 ? ` / ${pronoun}` : `• ${pronoun}`}</Text>
+                            )
+                        })
+                        
+                    }
+                    <Text className="text-xl mt-1 mb-5 text-gray-400" style={{fontFamily: 'SpaceGrotesk_700Bold'}}> •</Text>
+                    </View>
                     <EventLine className="z-2" eventLocation={"Arad"} eventTitle={"Mobtrap Fan Meeting"} navigation={navigation}/>
                 <FlatList
                 className='mt-[-12]'
@@ -52,16 +59,16 @@ export default function ProfileScreen({navigation}){
                 renderItem={({ item }) => (
                   <View className="flex m-5 mt-10  items-center">
                     <View className='w-44 h-44 rounded-lg bg-bg-dark-trans border'>
-                        <TouchableOpacity className='w-full h-full flex flex-col items-center justify-center'>
-                            <Image className="w-[50%] h-[50%]" source={{uri: "https://imgs.search.brave.com/8kGu884s4LEEEGG8fdg0GUhcEAsIFbXE6bzj1HSdnB0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jb250/ZW50LmZvcnR1bmUu/Y29tL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDIzLzExL0FQMjMz/MTI3MjYyNTU3MjIt/ZTE2OTk0NzczMTI3/NDguanBnP3c9MTQ0/MCZxPTc1"}}></Image>
+                        <TouchableOpacity className='p-3 w-full h-full flex flex-col items-center justify-center'>
+                            <Image className="w-[50%] h-[50%]" source={{uri: item.img}}></Image>
                             <Text className='text-xl text-text ' style={{fontFamily: 'SpaceGrotesk_500Medium'}}>
                                 {item.text}
                             </Text>
-                            <Text className='text-md text-gray-500 ' style={{fontFamily: 'SpaceGrotesk_500Medium'}}>
-                                {item.text}
+                            <Text className='text-sm text-gray-500 text-center' style={{fontFamily: 'SpaceGrotesk_500Medium'}}>
+                                {item.subtext}
                             </Text>
                         </TouchableOpacity>
-                    </View>
+                    </View> 
                   </View>
                 )}
                 contentContainerStyle={"flex-column"}
