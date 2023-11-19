@@ -25,7 +25,7 @@ export const EventDashboardScreen= () => {
                 />
 
                 {
-                    isModalOpen ? <KickMemberModal /> : null
+                    isModalOpen ? <KickMemberModal setIsModalOpen={setIsModalOpen} /> : null
                 }
                 
                 <View className = 'mt-10 w-[400px] h-[300px]'> 

@@ -32,7 +32,7 @@ export default function ProfileScreen({navigation}){
                         <View className='absolute rounded-full w-10 h-10 bottom-14 right-[-10]  bg-bg-dark opacity-90 border-4 flex justify-center items-center'>
                             
                                     {console.log(user.ghostMode)}
-                                    <Text className='rounded-full' onPress = {toggleGhostMode}>👻</Text>
+                                    <Text className='rounded-full' onPress = {() => toggleGhostMode}>👻</Text>
                             
                         </View>
                     </View>
