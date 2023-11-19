@@ -15,10 +15,10 @@ import CameraIcon from '../../../assets/icons/camera-icon.svg';
 import { UserContext } from "../../contexts/UserContext";
 
 import * as Location from 'expo-location';
+import { useIsFocused } from "@react-navigation/native";
 
 export default function MapScreen({navigation}){
-    const [events, setEvents] = useState([
-    ]);
+    const [events, setEvents] = useState([]);
 
     const [focusedMarkerIndex, setFocusedMarkerIndex] = useState(-1);
 
@@ -30,6 +30,8 @@ export default function MapScreen({navigation}){
     });
 
     const { user, setLocation } = useContext(UserContext);
+
+    const isFocused = useIsFocused();
 
     useEffect(() => {
         (async () => {
@@ -50,9 +52,20 @@ export default function MapScreen({navigation}){
             .then(res => res.json())
             .then(data => {
                 setEvents(data);
+                console.log(events);
             })
         setFocusedMarkerIndex(-1);
-    }, []);
+    },[]);
+
+    useEffect(() => {
+        fetch(`${SERVER_IP}:4949/api/events/getEvents`)
+            .then(res => res.json())
+            .then(data => {
+                setEvents(data);
+                console.log(events);
+            })
+        setFocusedMarkerIndex(-1);
+    }, [isFocused]);
 
     return (
         <View className='w-full h-full items-center'>
@@ -62,6 +75,7 @@ export default function MapScreen({navigation}){
             >
                 {
                 events.map((marker, index) => {
+                    console.log('MARKER',marker);
                     return (
                         <Marker
                             key={index}
