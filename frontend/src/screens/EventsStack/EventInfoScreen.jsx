@@ -7,17 +7,6 @@ import { UserContext } from '../../contexts/UserContext';
 import {SERVER_IP} from '../../../settings.json';
 import { useContext, useState, useEffect } from 'react';
 
-<<<<<<< HEAD
-export const EventInfoScreen = ({navigation, eventId}) => {
-    const [data, setData] = useState([]);
-    const {user, event, getEventDetails} = useContext(UserContext);
-
-    useEffect(async () =>{
-        await getEventDetails();
-    },[]);
-
-  
-=======
 export const EventInfoScreen = ({navigation, route}) => {
     const data = [
         { id: '1', username: 'davidphex', photo: 'https://res.cloudinary.com/dvbzt3rq8/image/upload/f_auto,q_auto/glqdszt99rlzgwkdwo93' },
@@ -33,16 +22,16 @@ export const EventInfoScreen = ({navigation, route}) => {
 
     const [membersData, setMembersData] = useState([]);
 
-    const {user} = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     useEffect(() => {
         fetch(`http://172.20.10.8:4949/api/photos/getPhotosFromUsers?eventId=6558d27239638819552dd1e4`)
             .then(res => res.json())
             .then(result => {
+                console.log(result.data);
                 setMembersData(result.data);
             })
-    })
->>>>>>> main
+    },[]);
 
 
     return(
@@ -52,9 +41,16 @@ export const EventInfoScreen = ({navigation, route}) => {
                     className='w-full h-full absolute'
                     source={GradientGreen}
                 />
-                <View className="mt-12">
-                    <CurrentEvent manyButttons='share' navigation={navigation} ></CurrentEvent>
-                </View>
+                {
+                    user.currentEvent && (
+                        <View className="mt-12">
+                            <CurrentEvent 
+                                manyButttons='share' navigation={navigation} 
+                                event={user.currentEvent}
+                            />
+                        </View>
+                    )
+                }
 
                 <Text className='text-4xl text-text mb-[-20]'>People</Text>
 

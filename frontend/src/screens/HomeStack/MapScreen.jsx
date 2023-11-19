@@ -17,7 +17,7 @@ import { UserContext } from "../../contexts/UserContext";
 import * as Location from 'expo-location';
 
 export default function MapScreen({navigation}){
-    const [markers, setMarkers] = useState([
+    const [events, setEvents] = useState([
     ]);
 
     const [focusedMarkerIndex, setFocusedMarkerIndex] = useState(-1);
@@ -29,7 +29,7 @@ export default function MapScreen({navigation}){
         longitudeDelta: 0.0421,
     });
 
-    const { user, setLocation, isInEventCreatingMode, setIsInEventCreatingMode } = useContext(UserContext);
+    const { user, setLocation } = useContext(UserContext);
 
     useEffect(() => {
         (async () => {
@@ -42,15 +42,14 @@ export default function MapScreen({navigation}){
     
           let location = await Location.getCurrentPositionAsync({});
           setLocation(location);
-          console.log(location);
         })();
       }, []);
 
     useEffect(() => {
-        fetch(`${SERVER_IP}:4949/api/events/getMarkers`)
+        fetch(`http://172.20.10.8:4949/api/events/getEvents`)
             .then(res => res.json())
             .then(data => {
-                setMarkers(data);
+                setEvents(data);
             })
         setFocusedMarkerIndex(-1);
     }, []);
@@ -62,16 +61,16 @@ export default function MapScreen({navigation}){
                 onRegionChangeComplete={region => setMapCoords(region)}
             >
                 {
-                markers.map((marker, index) => {
+                events.map((marker, index) => {
                     return (
                         <Marker
                             key={index}
-                            coordinate={marker.location}
+                            coordinate={marker.coords}
                             title={marker.title}
                             description={marker.description}
                             onPress={() => setFocusedMarkerIndex(index)}
                             style={{
-                                zIndex: 30,
+                                zIndex: 50,
                                 width: 30,
                                 height: 30
                             }}
@@ -99,7 +98,11 @@ export default function MapScreen({navigation}){
             {
                 focusedMarkerIndex != -1 &&     
                     <View className='top-20 justify-center items-center'>
-                        <EventBillboard setFocusedMarkerIndex={setFocusedMarkerIndex}/>
+                        <EventBillboard 
+                            navigation={navigation}
+                            setFocusedMarkerIndex={setFocusedMarkerIndex}
+                            event={events[focusedMarkerIndex]}
+                        />
                     </View>
             }
             {
