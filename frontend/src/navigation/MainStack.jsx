@@ -21,17 +21,29 @@ export const MainStack = ({ navigation }) => {
 
       <Stack.Screen name="NavigationBar" component={NavigationBar} options={{
            headerShown: false, 
-           gestureEnabled: false,
+           gestureEnabled: true,
+           open: {
+            animation: 'timing',
+            config: {
+              duration: 300,
+            },
+           },
+           close: {
+            animation: 'timing',
+            config: {
+              duration: 300,
+            },
+           }
       }}/>
 
       <Stack.Screen name="AuthStack" component={AuthStack} options={{
         headerShown: false, 
-        gestureEnabled: false,
+        gestureEnabled: true,
       }}/>
 
       <Stack.Screen name="CameraScreen" component={CameraScreen} options={{
           headerShown: false, 
-          gestureEnabled: false,
+          gestureEnabled: true,
       }}/>
 
     </Stack.Navigator>
