@@ -46,7 +46,7 @@ export default function MapScreen({navigation}){
       }, []);
 
     useEffect(() => {
-        fetch(`http://172.20.10.8:4949/api/events/getEvents`)
+        fetch(`${SERVER_IP}:4949/api/events/getEvents`)
             .then(res => res.json())
             .then(data => {
                 setEvents(data);
@@ -66,16 +66,15 @@ export default function MapScreen({navigation}){
                         <Marker
                             key={index}
                             coordinate={marker.coords}
-                            title={marker.title}
-                            description={marker.description}
                             onPress={() => setFocusedMarkerIndex(index)}
                             style={{
                                 zIndex: 50,
                                 width: 30,
-                                height: 30
+                                height: 30,
+                                position: 'relative'
                             }}
                         >
-                            <CustomMarker focused={focusedMarkerIndex == index}/>
+                            <CustomMarker focused={focusedMarkerIndex === index}/>
                         </Marker>
                     )
                 })}
