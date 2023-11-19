@@ -41,6 +41,11 @@ Our backend runs on Node.js, the rockstar of server-side JavaScript. It's lightn
 
 For the frontend's style game, we picked Native Wind. It's like having a stylish wardrobe for our React Native components. With utility-first classes and a breeze of customization, we keep things looking fresh and on-brand without breaking a sweat.
 
+# Code Stats
+
+[![Lines of Code](https://img.shields.io/tokei/lines/github/stack-bytes/unify-app)](https://github.com/stack-bytes/unify-app)
+
+
 ## In a Nutshell 🌈
 
 This tech stack isn't just a lineup of cool-sounding names; it's the powerhouse behind Unify App's mission to connect and unite communities. So, buckle up and get ready for an experience fueled by cutting-edge tech and a whole lot of heart! ❤️✨
