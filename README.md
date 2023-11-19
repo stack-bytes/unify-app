@@ -44,6 +44,10 @@ For the frontend's style game, we picked Native Wind. It's like having a stylish
 
 [![Lines of Code](https://img.shields.io/tokei/lines/github/stack-bytes/unify-app)](https://github.com/stack-bytes/unify-app)
 
+# Git History 😲 
+![image](https://github.com/stack-bytes/unify-app/assets/147537737/eb3d7e09-5e2b-4026-b2ed-5b5335eb0ff4)
+
+
 
 ## In a Nutshell 🌈
 
