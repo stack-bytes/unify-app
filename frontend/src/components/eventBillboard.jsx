@@ -21,7 +21,7 @@ export const EventBillboard = ({navigation, setFocusedMarkerIndex, event, Custom
                                         }
                                     }
         */
-        if(user.currentEvent.organizer === user.id){
+        if(user.currentEvent.organizer !== user.id){
             navigation.getParent().navigate("EventStack", {
                 screen: 'EventDashboardScreen',
                 params: {
