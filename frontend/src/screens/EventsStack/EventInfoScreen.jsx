@@ -25,7 +25,7 @@ export const EventInfoScreen = ({navigation, route}) => {
     const { user } = useContext(UserContext);
 
     useEffect(() => {
-        fetch(`http://172.20.10.8:4949/api/photos/getPhotosFromUsers?eventId=6558d27239638819552dd1e4`)
+        fetch(`${SERVER_IP}:4949/api/photos/getPhotosFromUsers?eventId=6558d27239638819552dd1e4`)
             .then(res => res.json())
             .then(result => {
                 console.log(result.data);

@@ -8,6 +8,8 @@ import LocationIcon from '../../../assets/icons/location-icon.svg';
 import FlagIcon from '../../../assets/icons/flag-icon.svg';
 import ArrowIcon from '../../../assets/icons/arrow-icon.svg';
 import { UserContext } from '../../contexts/UserContext';
+import {SERVER_IP} from '../../../settings.json'
+
 
 export const CameraScreen = ({navigation, route}) => {
     const [hasPermission, setHasPermission] = useState(null);
@@ -37,7 +39,7 @@ export const CameraScreen = ({navigation, route}) => {
           type: 'image/jpg',
           name: 'test'
         })
-        fetch('http://172.20.10.8:4949/api/photos/postPhoto', {
+        fetch(`${SERVER_IP}:4949/api/photos/postPhoto`, {
           method: "POST",
           headers: {
             "Content-Type": "multipart/form-data",

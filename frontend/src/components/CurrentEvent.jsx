@@ -10,6 +10,9 @@ export const CurrentEvent = ({navigation, manyButttons, joinButton, event }) => 
 
     //buttons = 'join' 
     
+    const { user } = useContext(UserContext);
+
+
 
     const onExitPress = () => {
         setCurrentEvent(null);

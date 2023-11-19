@@ -180,6 +180,24 @@ const removeUserFromEvent = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
+
+const isUserOrganizer = async (req, res) => {
+    try{
+        const eventId = req.query.eventId;
+        const userId = req.query.userId;
+
+        const event = await Event.findById(eventId);
+
+        if(event.organizer == userId){
+            res.status(200).json(true);
+        } else {
+            res.status(200).json(false);
+        }
+    } catch (err){
+        console.error('Error adding user to event:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
   
 module.exports = {
     getUsers,
@@ -189,4 +207,5 @@ module.exports = {
     updateUser,
     getUserFriends,
     addUserToEvent, 
+    isUserOrganizer,
 }

@@ -17,7 +17,7 @@ export default function ShopScreen({navigation}){
     useEffect(()=> {
         fetch(`${SERVER_IP}:4949/api/awards/getDailyShop`)
         .then(res => res.json())
-        .then((res) => {setData(res)})
+        .then((res) => {setData(res); console.log(res);})
     },[])
 
 

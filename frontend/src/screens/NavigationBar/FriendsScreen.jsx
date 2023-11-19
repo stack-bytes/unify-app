@@ -1,18 +1,19 @@
 import {View, Image, TouchableOpacity, Text, ImageBackground, FlatList} from 'react-native';
 import GradientGreen from '../../../assets/backgrounds/GradientGreen.png';
+import {useState, useEffect} from 'react';
 
+import {SERVER_IP} from '../../../settings.json';
 export const FriendsScreen = ({navigation}) => {
-        const data = [
-    { id: '1', text: 'Item 1' },
-    { id: '2', text: 'Item 2' },
-    { id: '3', text: 'Item 3' },
-    { id: '4', text: 'Item 4' },
-    { id: '5', text: 'Item 5' },
-    { id: '6', text: 'Item 6' },
-    { id: '7', text: 'Item 7' },
-    { id: '8', text: 'Item 8' },
-    { id: '9', text: 'Item 9' },    
-];
+
+
+
+    const [data, setData] = useState([]);
+
+    const fetchFriendsData = async () => {
+        const response = await fetch(`${SERVER_IP}:4949/api/friends/`);
+        const data = await response.json();
+        setData(data);
+    }
 
     return(
          <View className='w-full h-full bg-bg-dark'>

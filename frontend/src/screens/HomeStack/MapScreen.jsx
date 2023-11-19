@@ -45,14 +45,20 @@ export default function MapScreen({navigation}){
         })();
       }, []);
 
-    useEffect(() => {
-        fetch(`http://172.20.10.8:4949/api/events/getEvents`)
-            .then(res => res.json())
-            .then(data => {
-                setEvents(data);
-            })
+    useEffect(async () => {
+        await getMarkers();
         setFocusedMarkerIndex(-1);
     }, []);
+
+    useEffect(() => {
+        getMarkers();
+    },[events])
+
+    const getMarkers = async() => {fetch(`${SERVER_IP}:4949/api/events/getEvents`)
+    .then(res => res.json())
+    .then(data => {
+        setEvents(data);
+    })};
 
     return (
         <View className='w-full h-full items-center'>

@@ -10,5 +10,6 @@ router.delete('/deleteUser', controller.deleteUser);
 router.patch('/updateUser', controller.updateUser);
 router.get('/getUserFriends', controller.getUserFriends);
 router.post('/addUserToEvent', controller.addUserToEvent);
+router.get('/isuserorganizer', controller.isUserOrganizer);
 
 module.exports = router;
