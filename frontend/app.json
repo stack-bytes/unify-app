@@ -15,7 +15,8 @@
       "**/*"
     ],
     "plugins": [
-      "expo-camera"
+      "expo-camera",
+      "expo-location"
     ],
     "ios": {
       "supportsTablet": true
