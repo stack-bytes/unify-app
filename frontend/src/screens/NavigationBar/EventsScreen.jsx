@@ -11,6 +11,8 @@ import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { DeleteModal } from "../../components/modals/deleteModal";
 import { NotificationModal } from "../../components/modals/notificationModal";
+import { EventBillboard } from "../../components/eventBillboard";
+import { MixedButton } from "../../components/Buttons/mixedButton";
 
 const data = [
     {
@@ -68,30 +70,37 @@ export default function EventsScreen({navigation}){
                 className='w-full h-full absolute'
                 source={GradientGreen}
             />
+
             <View className='w-full h-full items-center top-20'>
+
                 <View className='flex items-center w-[100%] gap-y-2'>
+
                     <Text 
                         style={{fontFamily: 'SpaceGrotesk_500Medium'}}
                         className='text-text text-6xl'
                     >
                         Events
                     </Text>
-                    <SearchBar></SearchBar>
 
-                    <View className='h-[500px]'>
+                    <SearchBar />
+
+                    <View className='h-[510px]'>
+
                         {
-                            user.currentEvent && <CurrentEvent manyButttons="user" navigation={navigation} event={{
-                                _id: user.currentEvent.id,
-                                name: user.currentEvent.name,
-                                location: user.currentEvent.location,
-                            }} />
+                            user.currentEvent && 
+                                <EventBillboard
+                                    navigation={navigation}
+                                    event={user.currentEvent} 
+                                    CustomButton={MixedButton}
+                                />
                         }
 
-                        <View className='bg-[#0E0D0D]/[0.27] border-2 border-[#0E0D0D]/[0.29] w-[90vw] h-16 rounded-lg mb-2'>
+                        <View className='bg-[#0E0D0D]/[0.27] border-2 border-[#0E0D0D]/[0.29] w-[90vw] h-16 rounded-lg mb-2 mt-6'>
                             <TouchableOpacity 
                                 className='w-full h-full absolute z-10'
                                 onPress={() => setListIsOpen(!listIsOpen)}
                             />
+
                             <View className='ml-4 h-full justify-start flex-row items-center '>
                                 <Text 
                                     style={{fontFamily: 'SpaceGrotesk_500Medium'}}
