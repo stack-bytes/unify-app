@@ -24,17 +24,17 @@ export const AuthStack = ({ navigation }) => {
 
       <Stack.Screen name="AuthScreen" component={AuthScreen} options={{
            headerShown: false, 
-           gestureEnabled: false,
+           gestureEnabled: true,
       }}/>
 
       <Stack.Screen name="SignupScreen" component={SignupScreen} options={{
            headerShown: false, 
-           gestureEnabled: false,
+           gestureEnabled: true,
       }}/>
 
       <Stack.Screen name="LoginScreen" component={LoginScreen} options={{
            headerShown: false, 
-           gestureEnabled: false,
+           gestureEnabled: true,
       }}/>
 
     </Stack.Navigator>
