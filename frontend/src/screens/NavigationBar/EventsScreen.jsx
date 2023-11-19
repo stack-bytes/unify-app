@@ -80,7 +80,11 @@ export default function EventsScreen({navigation}){
 
                     <View className='h-[500px]'>
                         {
-                            user.currentEvent && <CurrentEvent manyButttons="user" navigation={navigation} event={user.currentEvent} />
+                            user.currentEvent && <CurrentEvent manyButttons="user" navigation={navigation} event={{
+                                _id: user.currentEvent.id,
+                                name: user.currentEvent.name,
+                                location: user.currentEvent.location,
+                            }} />
                         }
 
                         <View className='bg-[#0E0D0D]/[0.27] border-2 border-[#0E0D0D]/[0.29] w-[90vw] h-16 rounded-lg mb-2'>
@@ -107,6 +111,13 @@ export default function EventsScreen({navigation}){
                                 keyExtractor={(item) => item._id}
                                 renderItem={({item}) => (
                                     <View className='bg-[#0E0D0D]/[0.27] border-2 border-[#0E0D0D]/[0.29] w-[90vw] h-16 rounded-lg justify-start flex-row pl-3 items-center mb-2'>
+                                        <TouchableOpacity 
+                                            className='w-full h-full absolute z-20'
+                                            onPress={() => navigation.navigate('EventInfoScreen', {
+                                                    eventId: item._id,
+                                                    event: item,
+                                            })}
+                                        />
                                         <TrendingIcon />
                                         <View className='h-[70%] justify-center py-2'>
                                             <Text 

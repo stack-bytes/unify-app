@@ -42,7 +42,12 @@ export const EventBillboard = ({navigation, setFocusedMarkerIndex, event}) => {
                                     <TouchableOpacity onPress = {()=>navigation.getParent().navigate("EventStack", {
                                         screen: 'EventInfoScreen',
                                         params: {
-                                            eventId: '6558d27239638819552dd1e4'
+                                            eventId: '6558d27239638819552dd1e4',
+                                            event: {
+                                                _id: user.currentEvent._id,
+                                                name: user.currentEvent.name,
+                                                location: user.currentEvent.location,
+                                            }
                                         }
                                     })} className="w-full h-[100%] bg-[#F5C211]/[0.71] border-2 border-[#F5C211]/[1] rounded-br-md flex flex-row items-center justify-center">
                                         <View className='flex-row items-center'>
