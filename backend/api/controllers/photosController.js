@@ -49,7 +49,7 @@ const postPhoto = async (req, res) => {
         if(req.file){
             const result = await uploader.upload(req.file.path);
             if(result){
-                await EventPhoto.findByIdAndRemove({
+                const oldPhoto = await EventPhoto.findByIdAndRemove({
                     eventId: req.body.eventId,
                     userId: req.body.userId,
                 });
