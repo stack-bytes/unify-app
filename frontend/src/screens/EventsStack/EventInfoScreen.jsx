@@ -20,33 +20,15 @@ export const EventInfoScreen = ({navigation, route}) => {
         { id: '9', text: 'Item 9' },    
     ];
 
-    const [eventData, setEventData] = useState(null);
-    const [photos, setPhotos] = useState(null);
-    const [globalData, setGlobalData] = useState(null);
-    const [eventMembers, setEventMembers] = useState(null);
+    const [membersData, setMembersData] = useState([]);
 
     const {user} = useContext(UserContext);
 
     useEffect(() => {
-        fetch(`http://172.20.10.8:4949/api/events/getEventById/6558d27239638819552dd1e4`)
-            .then(res => res.json())
-            .then(data => {
-                setEventData(data);
-                setEventMembers(data.members);
-            })
-    },[]);
-
-    useEffect(() => {
-        fetch(`http://172.20.10.8:4949/api/photos/getPhotosFromEvent/6558d27239638819552dd1e4`)
+        fetch(`http://172.20.10.8:4949/api/photos/getPhotosFromUsers?eventId=6558d27239638819552dd1e4`)
             .then(res => res.json())
             .then(result => {
-                console.log(result);
-                result.data.map((item, index) => {
-                    //find item in eventMembers with the same userId value and add the photo to that item and keep it mind it's a usestate
-                    setEventMembers([...eventMembers, member.photo = item.photo]);
-
-                })
-                console.log(eventMembers);
+                setMembersData(result.data);
             })
     })
 
