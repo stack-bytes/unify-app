@@ -9,9 +9,7 @@ const EventLine = ({eventTitle, eventLocation, navigation}) => {
 
 
   return (
-    <TouchableOpacity onPress={()=>{
-        navigation.getParent("NavigationBar").navigate("EventStack",{screen:"EventInfoScreen"});
-    }}
+    <TouchableOpacity
     className="w-[90vw] h-[auto] bg-bg-dark-trans rounded-md p-2 mt-5 flex flex-row items-center justify-start">
       <View className="p-0.5 bg-secondary-trans rounded-md border-2 border-primary">
         <LiveStreamingSvg></LiveStreamingSvg>

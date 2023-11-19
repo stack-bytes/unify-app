@@ -39,7 +39,10 @@ export default function ProfileScreen({navigation}){
 
                     <Text className="text-4xl mt-5 text-text" style={{fontFamily: 'SpaceGrotesk_700Bold'}}>Matthew Duke</Text>
                     <Text className="text-xl mt-1 mb-5 text-gray-400" style={{fontFamily: 'SpaceGrotesk_700Bold'}}>he / him</Text>
-                    <EventLine className="z-2" eventLocation={"Live"} eventTitle={"Participating at an event"} navigation={navigation}/>
+                    <TouchableOpacity onPress={()=>{
+        navigation.navigate("EventStack",{screen:"EventInfoScreen"});
+    }}></TouchableOpacity>
+                    <EventLine className="z-[-10]" eventLocation={"Live"} eventTitle={"Participating at an event"} navigation={navigation}/>
                 <View className = 'mt-[-28]'>
                   <FlatList
                     className=''
