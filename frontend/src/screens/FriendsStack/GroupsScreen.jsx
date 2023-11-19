@@ -2,15 +2,15 @@ import {View, Image, TouchableOpacity, Text, ImageBackground, FlatList} from 're
 import GradientGreen from '../../../assets/backgrounds/GradientGreen.png';
 export const GroupsScreen = ({navigation}) => {
     const data = [
-        { id: '1', text: 'Item 1' },
-        { id: '2', text: 'Item 2' },
-        { id: '3', text: 'Item 3' },
-        { id: '4', text: 'Item 4' },
-        { id: '5', text: 'Item 5' },
-        { id: '6', text: 'Item 6' },
-        { id: '7', text: 'Item 7' },
-        { id: '8', text: 'Item 8' },
-        { id: '9', text: 'Item 9' },    
+        { id: '1', text: 'G1' },
+        { id: '2', text: 'G2' },
+        { id: '3', text: 'G3' },
+        { id: '4', text: 'G4' },
+        { id: '5', text: 'G5' },
+        { id: '6', text: 'G6' },
+        { id: '7', text: 'G7' },
+        { id: '8', text: 'G8' },
+        { id: '9', text: 'G9' },    
     ];
     
 
@@ -34,11 +34,7 @@ export const GroupsScreen = ({navigation}) => {
             renderItem={({ item }) => (
                 <View className='w-44 h-44 rounded-lg bg-bg-dark-trans border m-2'>
                     <TouchableOpacity className='w-full h-full flex flex-col items-center justify-center'>
-                        <Image className="w-[50%] h-[50%]" source={{uri: "https://imgs.search.brave.com/8kGu884s4LEEEGG8fdg0GUhcEAsIFbXE6bzj1HSdnB0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jb250/ZW50LmZvcnR1bmUu/Y29tL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDIzLzExL0FQMjMz/MTI3MjYyNTU3MjIt/ZTE2OTk0NzczMTI3/NDguanBnP3c9MTQ0/MCZxPTc1"}}></Image>
-                        <Text className='text-xl text-text ' style={{fontFamily: 'SpaceGrotesk_500Medium'}}>
-                            {item.text}
-                        </Text>
-                        <Text className='text-md text-gray-500 ' style={{fontFamily: 'SpaceGrotesk_500Medium'}}>
+                        <Text className='text-4xl bg-bg-dark-trans p-14 text-text ' style={{fontFamily: 'SpaceGrotesk_500Medium'}}>
                             {item.text}
                         </Text>
                     </TouchableOpacity>

@@ -14,6 +14,7 @@ import { NotificationModal } from "../../components/modals/notificationModal";
 import { EventBillboard } from "../../components/eventBillboard";
 import { MixedButton } from "../../components/Buttons/mixedButton";
 
+import {SERVER_IP} from '../../../settings.json'
 const data = [
     {
         id: 1,
@@ -57,7 +58,7 @@ export default function EventsScreen({navigation}){
     const {user, toggleGhostMode} = useContext(UserContext);
 
     useEffect(() => {
-        fetch(`http://172.20.10.8:4949/api/events/getEvents`)
+        fetch(`${SERVER_IP}:4949/api/events/getEvents`)
             .then(res => res.json())
             .then(data => {
                 setEvents(data);

@@ -11,10 +11,9 @@ export const UserProvider = ({ children }) => {
     pfp: 'https://res.cloudinary.com/dvbzt3rq8/image/upload/f_auto,q_auto/glqdszt99rlzgwkdwo93',
     currentEvent: null,
     awards:  [
-        { id: '1', text: 'Award 1', subtext:"An amazing award for an amazing person", img: 'https://picsum.photos/seed/picsum/200/300' },
-        { id: '2', text: 'Award 2', subtext:"An amazing award for an amazing person", img: 'https://picsum.photos/seed/picsum/200/300' },
-        { id: '3', text: 'Award 3', subtext:"An amazing award for an amazing person", img: 'https://picsum.photos/seed/picsum/200/300' },
-        { id: '4', text: 'Award 4', subtext:"An amazing award for an amazing person", img: 'https://picsum.photos/seed/picsum/200/300' },
+        { id: '1', text: 'Friendly Neighbour', subtext:"An amazing award for an amazing person", img: 'https://cdn-icons-png.flaticon.com/128/2388/2388402.png' },
+        { id: '2', text: 'Community Hero', subtext:"An amazing award for an amazing person", img: 'https://cdn-icons-png.flaticon.com/128/10740/10740593.png' },
+        { id: '3', text: 'Spread Love', subtext:"An amazing award for an amazing person", img: 'https://imgs.search.brave.com/IRBxOvBY4vm06axB2xlft0pDlnHRIfmGInNA2KVwPwA/rs:fit:560:320:1/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy90/aHVtYi80LzQ4L0dh/eV9QcmlkZV9GbGFn/LnN2Zy81MTJweC1H/YXlfUHJpZGVfRmxh/Zy5zdmcucG5n' }
     ],
     location: null,
     ghostMode: false,
@@ -27,6 +26,7 @@ export const UserProvider = ({ children }) => {
       .then(res => res.json())
       .then(data => {
         setEvent(data.data);
+        console.log("EVENT" + data.data);
       })
       .catch(error => {
         console.error('Error fetching event details:', error);

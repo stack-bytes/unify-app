@@ -3,15 +3,18 @@ import GradientGreen from '../../../assets/backgrounds/GradientGreen.png';
 import SnowIcon from '../../../assets/icons/snow.svg';
 import TrashIcon from '../../../assets/icons/trash-icon.svg';
 import XIcon from '../../../assets/icons/X-icon.svg';
-
+import { useContext } from 'react';
 import { GenericButton } from '../../components/Buttons/genericButton';
 import { KickMemberModal } from '../../components/modals/kickMemberModal';
 import { useState } from 'react';
-
- 
+import { UserContext } from '../../contexts/UserContext';
+import {SERVER_IP} from '../../../settings.json'
 
 export const EventDashboardScreen= () => {
+
+    
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const {user} = useContext(UserContext);
 
     return(
         <>
@@ -73,6 +76,12 @@ export const EventDashboardScreen= () => {
                                 SvgIcon={TrashIcon}
                                 SvgIconColor={'#fff'}
                                 height = {50}
+                                onPress={()=>{fetch(`${SERVER_IP}:4949/api/events/deleteEvent?eventId=${user.currentEvent._id}`, {
+                                    method: 'DELETE',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                    },
+                                });}}
                             />
                         </View>
 

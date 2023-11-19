@@ -8,6 +8,7 @@ import flagIcon from "../../../assets/icons/flag-icon.svg";
 import ArrowIcon from "../../../assets/icons/arrow-icon.svg";
 import { UserContext } from "../../contexts/UserContext";
 
+import {SERVER_IP} from '../../../settings.json'
 
 export const CreateEventScreen = ({navigation, route}) => {
     const [eventName, setEventName] = useState('');
@@ -17,7 +18,7 @@ export const CreateEventScreen = ({navigation, route}) => {
     const { user, setCurrentEvent } = useContext(UserContext);
 
     const createEvent = async () => {
-        fetch(`http://172.20.10.8:4949/api/events/createEvent`, {
+        fetch(`${SERVER_IP}:4949/api/events/createEvent`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
