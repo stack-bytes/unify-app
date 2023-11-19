@@ -12,4 +12,5 @@ router.delete('/deleteEvent', controller.deleteEvent);
 router.get('/getMarkers', controller.getMarkers);
 
 
+
 module.exports = router;

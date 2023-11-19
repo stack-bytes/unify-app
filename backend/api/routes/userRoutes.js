@@ -9,5 +9,6 @@ router.post('/createUser', controller.createUser);
 router.delete('/deleteUser', controller.deleteUser);
 router.patch('/updateUser', controller.updateUser);
 router.get('/getUserFriends', controller.getUserFriends);
+router.post('/addUserToEvent', controller.addUserToEvent);
 
 module.exports = router;
