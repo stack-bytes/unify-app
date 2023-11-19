@@ -3,7 +3,7 @@ import { GenericButton } from "../Buttons/genericButton"
 
 import TrashIcon from '../../../assets/icons/trash-icon.svg';
 
-export const KickMemberModal = () => {
+export const KickMemberModal = ({setIsModalOpen}) => {
     
     return (
         <View className='w-full h-full z-30 justify-center items-center'>
@@ -30,6 +30,7 @@ export const KickMemberModal = () => {
                         buttonText='Cancel'
                         backgroundColor='rgba(14,13,13,0.29)'
                         borderColor='rgba(14,13,13,0.29)'
+                        onPress={() => setIsModalOpen(false)}
                         
                     />
                     <GenericButton 

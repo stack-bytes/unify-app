@@ -13,7 +13,13 @@ export const CustomMarker = ({focused}) => {
     },[focused]);
 
     return (
-        <View className='w-full h-full justify-center items-center'>
+        <View style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            position: 'relative',
+            width: '100%',
+            height: '100%',
+        }}>
             <Animated.View
                 style={{
                     width: iconSize,
