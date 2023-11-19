@@ -9,6 +9,8 @@ import InfoIcon from '../../assets/icons/info-icon.svg';
 export const CurrentEvent = ({navigation, manyButttons, joinButton, event }) => {
 
     //buttons = 'join' 
+
+    const {user, setCurrentEvent} = useContext(UserContext);
     
 
     const onExitPress = () => {
@@ -16,7 +18,11 @@ export const CurrentEvent = ({navigation, manyButttons, joinButton, event }) => 
     }
 
     const onJoinPress = () => {
-        //join event
+
+        setCurrentEvent(event);
+        navigation.getParent().navigate('EventStack', {
+            screen: 'EventsScreen'
+        })
     }
     return(
             <View className="relative w-[90vw] h-[300px]  rounded-md">
@@ -41,8 +47,10 @@ export const CurrentEvent = ({navigation, manyButttons, joinButton, event }) => 
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress = {()=>navigation.navigate("EventInfoScreen", {
-                        params: {
-                            eventId: '6558d27239638819552dd1e4'
+                        event: {
+                            _id: user.currentEvent._id,
+                            name: user.currentEvent.name,
+                            location: user.currentEvent.location,
                         }
                     })} className="w-[50%] h-[100%] bg-[#F5C211]/[0.71] border-2 border-[#F5C211]/[1] rounded-br-md flex flex-row items-center justify-center">
                         <View className='flex-row items-center'>

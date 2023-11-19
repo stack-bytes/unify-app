@@ -42,11 +42,11 @@ export const EventInfoScreen = ({navigation, route}) => {
                     source={GradientGreen}
                 />
                 {
-                    user.currentEvent && (
+                    (
                         <View className="mt-12">
                             <CurrentEvent 
-                                manyButttons='share' navigation={navigation} 
-                                event={user.currentEvent}
+                                manyButttons={(user.currentEvent && user.currentEvent.id == route.params.event._id) ? 'share' : 'join'} navigation={navigation} 
+                                event={route.params.event}
                             />
                         </View>
                     )
