@@ -14,7 +14,7 @@ export const CreateEventScreen = ({navigation, route}) => {
     const [eventLocation, setEventLocation] = useState('');
     const [eventType, setEventType] = useState('');
 
-    const { user } = useContext(UserContext);
+    const { user, setCurrentEvent } = useContext(UserContext);
 
     const createEvent = async () => {
         fetch(`http://172.20.10.8:4949/api/events/createEvent`, {
@@ -34,6 +34,11 @@ export const CreateEventScreen = ({navigation, route}) => {
             .then(res => res.json())
             .then(result => {
                 navigation.getParent().navigate('HomeStack');
+                setCurrentEvent({
+                    id: result.data._id,
+                    name: result.data.name,
+                    location: result.data.location,
+                });
             })
     }
     return (
