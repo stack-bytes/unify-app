@@ -7,17 +7,7 @@ import { UserContext } from '../../contexts/UserContext';
 import {SERVER_IP} from '../../../settings.json';
 import { useContext, useState, useEffect } from 'react';
 
-<<<<<<< HEAD
-export const EventInfoScreen = ({navigation, eventId}) => {
-    const [data, setData] = useState([]);
-    const {user, event, getEventDetails} = useContext(UserContext);
 
-    useEffect(async () =>{
-        await getEventDetails();
-    },[]);
-
-  
-=======
 export const EventInfoScreen = ({navigation, route}) => {
     const data = [
         { id: '1', text: 'davidphex', photo: 'https://res.cloudinary.com/dvbzt3rq8/image/upload/f_auto,q_auto/glqdszt99rlzgwkdwo93' },
@@ -50,7 +40,6 @@ export const EventInfoScreen = ({navigation, route}) => {
                 setPhotos(data);
             })
     })
->>>>>>> main
 
 
     return(

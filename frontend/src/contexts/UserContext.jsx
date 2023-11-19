@@ -33,36 +33,8 @@ export const UserProvider = ({ children }) => {
       });
   };
 
-  const toggleGhostMode = () => {
-    setUser({
-      ...user,
-      ghostMode: !user.ghostMode,
-    });
-  };
 
-<<<<<<< HEAD
-  const setCurrentEvent = (event) => {
-    setUser({
-      ...user,
-      currentEvent: event,
-    });
-  };
-
-  return (
-    <UserContext.Provider value={{
-      user,
-      event,
-      setUser,
-      toggleGhostMode,
-      setCurrentEvent,
-      getEventDetails,
-    }}>
-      {children}
-    </UserContext.Provider>
-  );
-};
-=======
-    const [isInEventCreatingMode, setIsInEventCreatingMode] = useState(true);
+const [isInEventCreatingMode, setIsInEventCreatingMode] = useState(true);
 
     const toggleGhostMode = () => {
         setUser({
@@ -91,4 +63,3 @@ export const UserProvider = ({ children }) => {
         </UserContext.Provider>
     )
 }
->>>>>>> main

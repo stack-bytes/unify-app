@@ -96,18 +96,32 @@ const getPhotosFromUsers = async (req, res) => {
         const photosFromEvent = await EventPhoto.find({ eventId: eventId });
 
         const data = [];
-        console.log(photosFromEvent)
-        for (const photo of photosFromEvent) {
-            if (eventObject.members.includes(photo.userId)) {
-                const userObject = await User.findById(photo.userId);
 
-                if (userObject) {
-                    data.push({
-                        id: photo.userId,
-                        username: userObject.username,
-                        photo: photo.uri,
-                    });
+        for (let member of eventObject.members) {
+            let ok = false;
+
+            for (let photo of photosFromEvent) {
+                if (photo.userId == member) {
+                    const userObject = await User.findById(photo.userId);
+                    ok = true;
+
+                    if (userObject) {
+                        data.push({
+                            id: photo.userId,
+                            username: userObject.username,
+                            photo: photo.uri,
+                        });
+                    }
                 }
+            }
+
+            if (!ok) {
+                const userObject = await User.findById(member);
+                data.push({
+                    id: member,
+                    username: userObject.username, 
+                    photo: "",
+                });
             }
         }
 
@@ -122,6 +136,7 @@ const getPhotosFromUsers = async (req, res) => {
         res.status(500).json({ message: e.message });
     }
 };
+
 
 module.exports = {
     getPhotos,
