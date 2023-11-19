@@ -34,11 +34,7 @@ export const CreateEventScreen = ({navigation, route}) => {
             .then(res => res.json())
             .then(result => {
                 navigation.getParent().navigate('HomeStack');
-                setCurrentEvent({
-                    id: result.data._id,
-                    name: result.data.name,
-                    location: result.data.location,
-                });
+                setCurrentEvent(result);
             })
     }
     return (
