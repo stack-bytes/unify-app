@@ -80,20 +80,6 @@ export default function MapScreen({navigation}){
                         </Marker>
                     )
                 })}
-                {
-                    isInEventCreatingMode &&
-                        <Marker
-                            coordinate={mapCoords}
-                            title='New Event'
-                            style={{
-                                zIndex: 30,
-                                width: 30,
-                                height: 30
-                            }}
-                        >
-
-                        </Marker>
-                }
                 <Marker
                     coordinate={user.location?.coords}
                     title='You'
@@ -127,53 +113,7 @@ export default function MapScreen({navigation}){
                     </View>
                 )
             }
-            {
-                isInEventCreatingMode && 
-                <>
-                    <View className='absolute top-20 w-full items-center gap-y-3'>
-                        <View className='rounded-2xl bg-primary/[0.9] border-2 border-[#10C3A5]/[0.4] w-3/4 h-16 items-center justify-center'>
-                            <Text
-                                className='text-text text-3xl text-center'
-                                style={{fontFamily: 'IBMPlexSans_700Bold'}}
-                            >
-                                CREATING EVENT
-                            </Text>
-                        </View>
-                        <TouchableOpacity 
-                            className='rounded-2xl bg-red-700/[0.95] border-2 border-red-950/[0.8] w-1/3 h-9 items-center justify-center'
-                            onPress={() => setIsInEventCreatingMode(false)}
-                        >
-                            <Text
-                                className='text-text text-2xl text-center'
-                                style={{fontFamily: 'IBMPlexSans_700Bold'}}
-                            >
-                                CANCEL
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-
-                    <View className='absolute bottom-36 w-full items-center'>
-                        <TouchableOpacity 
-                            className='rounded-2xl bg-primary border-2 border-red-950/[0.2] w-1/3 h-10 items-center justify-center'
-                            onPress={() => {
-                                navigation.getParent('NavigationBar').navigate('EventStack', {
-                                    screen: 'CreateEventScreen',
-                                    params: {
-                                        mapCoords: mapCoords
-                                    }
-                                })
-                            }}
-                        >
-                            <Text
-                                className='text-text text-xl text-center'
-                                style={{fontFamily: 'IBMPlexSans_700Bold'}}
-                            >
-                                CONTINUE
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                </>
-            }
+        
         </View>
     )
 }

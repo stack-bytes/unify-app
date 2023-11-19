@@ -76,6 +76,7 @@ export const CameraScreen = ({navigation, route}) => {
   
     return (
       <View className='flex items-center w-full h-full'>
+        { user.currentEvent && (
         <View className='w-full h-40 absolute top-20 bg-transparent z-30 items-center justify-start p-5 gap-y-2'>
           <View className='h-8 w-full flex-row items-center justify-center gap-x-1'>
             <LocationIcon height='100%' fill='white'/>
@@ -83,7 +84,7 @@ export const CameraScreen = ({navigation, route}) => {
               style={{fontFamily: 'SpaceGrotesk_300Light'}}
               className='text-text text-xl'
             >
-              Universitate
+              {user.currentEvent.location}
             </Text>
           </View>
 
@@ -93,10 +94,11 @@ export const CameraScreen = ({navigation, route}) => {
               style={{fontFamily: 'SpaceGrotesk_700Bold'}}
               className='text-text text-5xl'
             >
-              Hackathon
+              {user.currentEvent.name}
             </Text>
           </View>
         </View>
+        )}
         {
           image ? (
             <View className='w-full h-full absolute z-20'>
