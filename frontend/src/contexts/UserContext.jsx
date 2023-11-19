@@ -8,8 +8,8 @@ export const UserProvider = ({ children }) => {
     id: 1,
     username: 'johndoe',
     pronouns: ["he","him","she"],
-    pfp: 'https://picsum.photos/200/300',
-    currentEvent: '6558d27239638819552dd1e4',
+    pfp: 'https://res.cloudinary.com/dvbzt3rq8/image/upload/f_auto,q_auto/glqdszt99rlzgwkdwo93',
+    currentEvent: null,
     awards:  [
         { id: '1', text: 'Award 1', subtext:"An amazing award for an amazing person", img: 'https://picsum.photos/seed/picsum/200/300' },
         { id: '2', text: 'Award 2', subtext:"An amazing award for an amazing person", img: 'https://picsum.photos/seed/picsum/200/300' },
@@ -46,6 +46,13 @@ export const UserProvider = ({ children }) => {
     });
   };
 
+  const setLocation = (location) => {
+    setUser({
+      ...user,
+      location: location,
+    });
+  }
+
   return (
     <UserContext.Provider value={{
       user,
@@ -54,6 +61,7 @@ export const UserProvider = ({ children }) => {
       toggleGhostMode,
       setCurrentEvent,
       getEventDetails,
+      setLocation,
     }}>
       {children}
     </UserContext.Provider>

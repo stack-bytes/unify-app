@@ -68,7 +68,7 @@ export default function EventsScreen({navigation}){
                     </Text>
                     <SearchBar></SearchBar>
                     {
-                         <CurrentEvent manyButttons="user" navigation={navigation} />
+                        user.currentEvent && <CurrentEvent manyButttons="user" navigation={navigation} event={user.currentEvent} />
                     }
 
                     <View className='bg-[#0E0D0D]/[0.27] border-2 border-[#0E0D0D]/[0.29] w-[90vw] h-16 rounded-lg'>
