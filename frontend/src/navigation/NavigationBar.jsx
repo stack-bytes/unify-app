@@ -119,14 +119,6 @@ export const NavigationBar = ({navigation}) => {
                         </View>
                     ),
                 }}
-                listeners={({navigation, route}) => ({
-                    tabPress: (e) => {
-                        if(route.name == 'HomeStack'){
-                            setIsInEventCreatingMode(!isInEventCreatingMode);
-                        }
-                    }
-
-                })}
             />
             <Tab.Screen 
                 name="EventStack" 

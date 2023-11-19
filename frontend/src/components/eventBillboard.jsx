@@ -1,12 +1,23 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import LiveStreamingSvg from '../../assets/icons/streaming.svg';
 import LogoutIcon from '../../assets/icons/logout-icon.svg';
+import InfoIcon from '../../assets/icons/info-icon.svg';
+import { useContext } from 'react';
+import { UserContext } from '../contexts/UserContext';
 
-export const EventBillboard = ({setFocusedMarkerIndex}) => {
+export const EventBillboard = ({navigation, setFocusedMarkerIndex, event}) => {
+    const { user, setCurrentEvent } = useContext(UserContext); 
+    const joinEvent = () => {
+        setCurrentEvent({
+            id: event._id,
+            name: event.name,
+            location: event.location,
+        })
+    }
     return (
         <View className="relative w-[90vw] h-[200px] border-2 border-[#121212]/[0.3]  rounded-md">
-                <Text style={{fontFamily: 'SpaceGrotesk_700Bold'}} className="absolute text-text z-10 top-5 left-5 text-4xl">Loaction</Text>
-                <Text style={{fontFamily: 'SpaceGrotesk_500Medium'}} className="absolute text-primary z-10 top-[60px] left-6 text-xl">Loaction</Text>
+                <Text style={{fontFamily: 'SpaceGrotesk_700Bold'}} className="absolute text-text z-10 top-5 left-5 text-4xl">{event.name}</Text>
+                <Text style={{fontFamily: 'SpaceGrotesk_500Medium'}} className="absolute text-primary z-10 top-[60px] left-6 text-xl">{event.location}</Text>
                 <View className="absolute z-20 p-0.5 top-24 left-5 bg-secondary-trans rounded-md border-2 border-primary">
                     <LiveStreamingSvg/>
                 </View>
@@ -26,15 +37,31 @@ export const EventBillboard = ({setFocusedMarkerIndex}) => {
                     {
                     (
                         <>
-                            <TouchableOpacity 
-                                    className="w-[100%] rounded-br-md h-[100%] flex flex-row items-center justify-center bg-[#19C391]/[0.9] border-2 border-primary/[0.1]  rounded-bl-md"
-                                    //onPress={onJoinPress}
-                                >
-                                    <View className='flex-row items-center'>
-                                        <LogoutIcon fill='white' />
-                                        <Text style={{fontFamily: 'IBMPlexSans_700Bold'}} className="pl-2 text-xl text-white">Join Event</Text>
-                                    </View>
-                                </TouchableOpacity>
+                            {
+                                user.currentEvent ? (
+                                    <TouchableOpacity onPress = {()=>navigation.getParent().navigate("EventStack", {
+                                        screen: 'EventInfoScreen',
+                                        params: {
+                                            eventId: '6558d27239638819552dd1e4'
+                                        }
+                                    })} className="w-full h-[100%] bg-[#F5C211]/[0.71] border-2 border-[#F5C211]/[1] rounded-br-md flex flex-row items-center justify-center">
+                                        <View className='flex-row items-center'>
+                                            <InfoIcon className='100%' fill='white'/>
+                                            <Text style={{fontFamily: 'IBMPlexSans_700Bold'}} className="pl-2 text-xl text-white">Info</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                ) : (
+                                    <TouchableOpacity 
+                                        className="w-[100%] rounded-br-md h-[100%] flex flex-row items-center justify-center bg-[#19C391]/[0.9] border-2 border-primary/[0.1]  rounded-bl-md"
+                                        onPress={joinEvent}
+                                    >
+                                        <View className='flex-row items-center'>
+                                            <LogoutIcon fill='white' />
+                                            <Text style={{fontFamily: 'IBMPlexSans_700Bold'}} className="pl-2 text-xl text-white">Join Event</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                )
+                            }
                         </>
                     )
                 }

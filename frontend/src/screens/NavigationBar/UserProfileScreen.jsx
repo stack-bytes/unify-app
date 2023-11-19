@@ -1,5 +1,5 @@
 import { ImageBackground, View ,Text,Image, FlatList } from "react-native";
-
+import { useContext } from "react";
 
 import GradientBlue from '../../../assets/backgrounds/GradientBlue.png'
 import { SpaceGrotesk_400Regular } from "@expo-google-fonts/space-grotesk";
@@ -10,19 +10,14 @@ import EventLine from '../../components/EventLine';
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 
+import { useState } from "react";
+import { UserContext } from "../../contexts/UserContext";
+
 export default function ProfileScreen({navigation}){
-    const data = [
-    { id: '1', text: 'Item 1' },
-    { id: '2', text: 'Item 2' },
-    { id: '3', text: 'Item 3' },
-    { id: '4', text: 'Item 4' },
-    { id: '5', text: 'Item 5' },
-    { id: '6', text: 'Item 6' },
-    { id: '7', text: 'Item 7' },
-    { id: '8', text: 'Item 8' },
-    { id: '9', text: 'Item 9' },    
-];
     const {user, toggleGhostMode} = useContext(UserContext);
+
+    const [data, setData] = useState(user.awards);
+
     return (
         <View className='w-full h-full'>
             <ImageBackground source={GradientBlue} className='w-full h-full flex flex-col items-center justify-start'>
@@ -45,6 +40,7 @@ export default function ProfileScreen({navigation}){
                             
                         </View>
                     </View>
+
                     <Text className="text-4xl mt-5 text-text" style={{fontFamily: 'SpaceGrotesk_700Bold'}}>Username</Text>
                     <Text className="text-xl mt-1 mb-5 text-gray-400" style={{fontFamily: 'SpaceGrotesk_700Bold'}}>he / him</Text>
                     <EventLine className="z-2" eventLocation={"Arad"} eventTitle={"Mock Event Title"} navigation={navigation}/>

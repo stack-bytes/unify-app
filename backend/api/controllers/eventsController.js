@@ -22,11 +22,11 @@ const getMarkers = async (req, res) => {
 
 const getEventById = async (req, res) => {
     try {
-        const body = req.body;
+        //const body = req.body;
 
-        const {
-            eventId,
-        } = body;
+        const eventId = req.params.eventId;
+
+        console.log(req.params);
 
         if(!eventId){
             return res.send({message: 'Missing eventId'});
@@ -55,9 +55,8 @@ const createEvent = async (req, res) => {
             name,
             type,
             backgroundPic,
-            members,
-            groups,
             location,
+            coords
         } = body;
 
         if(!name){
@@ -72,25 +71,22 @@ const createEvent = async (req, res) => {
             return res.send({message: 'Missing backgroundPic'});
         }
 
-        if(!members){
-            return res.send({message: 'Missing members'});
-        }
-
-        if(!groups){
-            return res.send({message: 'Missing groups'});
-        }
-
         if(!location){
             return res.send({message: 'Missing location'});
+        }
+
+        if(!coords){
+            return res.send({message: 'Missing coords'});
         }
 
         const event = await Event.create({
             name,
             type,
             backgroundPic,
-            members,
-            groups,
+            members: [],
+            groups: [],
             location,
+            coords,
             organizer: userId,
             createdAt: new Date(),
             updatedAt: new Date(),
