@@ -9,6 +9,8 @@ import InfoIcon from '../../assets/icons/info-icon.svg';
 export const CurrentEvent = ({navigation, manyButttons, joinButton, event }) => {
 
     //buttons = 'join' 
+
+    const {setCurrentEvent} = useContext(UserContext);
     
 
     const onExitPress = () => {
@@ -16,7 +18,7 @@ export const CurrentEvent = ({navigation, manyButttons, joinButton, event }) => 
     }
 
     const onJoinPress = () => {
-        //join event
+        setCurrentEvent(event);
     }
     return(
             <View className="relative w-[90vw] h-[300px]  rounded-md">

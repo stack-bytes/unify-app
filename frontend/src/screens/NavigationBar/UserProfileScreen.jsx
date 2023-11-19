@@ -1,17 +1,13 @@
 import { ImageBackground, View ,Text,Image, FlatList } from "react-native";
-import { useContext } from "react";
-
 import GradientBlue from '../../../assets/backgrounds/GradientBlue.png'
 import { SpaceGrotesk_400Regular } from "@expo-google-fonts/space-grotesk";
 
 import LiveStreamingSvg from '../../../assets/icons/streaming.svg';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import EventLine from '../../components/EventLine';
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 
-import { useState } from "react";
-import { UserContext } from "../../contexts/UserContext";
 
 export default function ProfileScreen({navigation}){
     const {user, toggleGhostMode} = useContext(UserContext);
