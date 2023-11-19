@@ -1,9 +1,11 @@
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 
-export const GenericButton = ({buttonText, backgroundColor, textColor, borderColor, SvgIcon, SvgIconColor, onPress}) => {
+export const GenericButton = ({buttonText, backgroundColor, textColor, borderColor, SvgIcon, SvgIconColor, onPress, height}) => {
     return (
         <TouchableOpacity 
-            style = {[styles.container, {backgroundColor: backgroundColor ? backgroundColor : 'black'}, {borderColor: borderColor ? borderColor : 'blue'}]}
+            style = {[styles.container, {backgroundColor: backgroundColor ? backgroundColor : 'black'},
+             {borderColor: borderColor ? borderColor : 'blue'},
+             {height: height ? height : 64}]}
             onPress={onPress}
         >
            

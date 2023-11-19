@@ -1,10 +1,18 @@
 import {View, Image, TouchableOpacity, Text, ImageBackground, FlatList} from 'react-native';
 import GradientGreen from '../../../assets/backgrounds/GradientGreen.png';
+import SnowIcon from '../../../assets/icons/snow.svg';
+import TrashIcon from '../../../assets/icons/trash-icon.svg';
+import XIcon from '../../../assets/icons/X-icon.svg';
+
 import { GenericButton } from '../../components/Buttons/genericButton';
+import { KickMemberModal } from '../../components/modals/kickMemberModal';
+import { useState } from 'react';
 
-
+ 
 
 export const EventDashboardScreen= () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     return(
         <>
             <View className='w-full h-full bg-bg-dark'>
@@ -12,20 +20,79 @@ export const EventDashboardScreen= () => {
                     className='w-full h-full absolute'
                     source={GradientGreen}
                 />
-                <View className='relative w-full top-20 flex flex-col items-center '>
-                    <TouchableOpacity onPress={()=>navigation.navigate("GroupsScreen")} className='rouned-lg opacity-40 w-[100%] h-[300px] p-5 rounded-md  flex flex-row items-center justify-center'>
-                        <Image className="w-full h-full rounded-lg" source={{uri:  "https://imgs.search.brave.com/8kGu884s4LEEEGG8fdg0GUhcEAsIFbXE6bzj1HSdnB0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jb250/ZW50LmZvcnR1bmUu/Y29tL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDIzLzExL0FQMjMz/MTI3MjYyNTU3MjIt/ZTE2OTk0NzczMTI3/NDguanBnP3c9MTQ0/MCZxPTc1"}}/>
-                    </TouchableOpacity>
-                    <Text className="absolute top-32 mt-2 text-2xl shadow-xl shadow-black text-text">Change Background</Text>
+
+                {
+                    isModalOpen ? <KickMemberModal /> : null
+                }
                 
-                    <TouchableOpacity className="w-[85%] mt-6 h-16 p-3 rounded-md bg-secondary-trans border-2 border-secondary flex flex-row items-center justify-center">
-                        <Text className="text-2xl text-secondary">Set Icebreaker</Text>
+                <View className = 'mt-10 w-[400px] h-[300px]'> 
+                    <Text className='text-text text-4xl font-bold text-center mt-10 mb-4' style = {{fontFamily: 'SpaceGrotesk_700Bold'}}>Admin Dashboard</Text>
+
+                    <TouchableOpacity className = 'w-full h-full items-center align-center'>
+                        <Image 
+                            source = {{uri: 'https://assets.editorial.aetnd.com/uploads/2010/01/new-york-city-edted.jpg'}}
+                            className = 'w-[340px] h-[230px] rounded-lg'
+                        />
                     </TouchableOpacity>
 
-                    <GenericButton buttonText={"Kick Member"} borderColor={""}></GenericButton>
+                    <View className = 'absolute p-1 mt-[205px] ml-[95px]'>
+                        <Text className = 'text-white text-[20px]'>Change Background</Text>
+                    </View>
+                    
+                    <View className = 'flex-column gap-y-3 items-center mt-[-70px]'>
+                        
+                        <View className = 'w-full items-center'>
+                            <GenericButton
+                                buttonText = 'Set Icebreaker'
+                                backgroundColor='rgba(22, 241, 228, 0.13)'
+                                textColor={'#16F1E4'}
+                                borderColor = {'#16F1E4'}
+                                SvgIcon={SnowIcon}
+                                SvgIconColor={'#16F1E4'}
+                                height = {50}
+                            />
+                        </View>
+                        <View className = 'w-full items-center'>
+                            <GenericButton
+                                buttonText = 'Kick Member'
+                                backgroundColor='rgba(255, 226, 54, 0.13)'
+                                textColor={'#FFE236'}
+                                borderColor = {'#FFE236'}
+                                SvgIcon={XIcon}
+                                SvgIconColor={'#FFE236'}
+                                height = {50}
+                                onPress={() => setIsModalOpen(true)}
+                            />
+                        </View>
+                        <View className = 'w-full items-center'>
+                            <GenericButton
+                                buttonText = 'Delete Event'
+                                backgroundColor='#C94646'
+                                textColor={'white'}
+                                borderColor = {'transparent'}
+                                SvgIcon={TrashIcon}
+                                SvgIconColor={'#fff'}
+                                height = {50}
+                            />
+                        </View>
+
+                        <View className = 'p-2'><Text className = 'text-white'>_______________________________</Text></View>
+
+                        <View className = 'w-full items-center'>
+                            <GenericButton
+                                buttonText = "Save changes"
+                                backgroundColor={`rgba(16, 227, 165, 0.17)`}
+                                textColor={'#10E3A5'}
+                                borderColor = {'#10E3A5'}
+                                SvgIcon={null}
+                                SvgIconColor={'#16F1E4'}
+                                height = {50}
+                            />
+                        </View>
+
+
+                    </View>
                 </View>
-
-
             </View>
         </>
     );
