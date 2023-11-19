@@ -154,11 +154,14 @@ const addUserToEvent = async (req, res) => {
         const eventId = req.query.eventId;
         const userId = req.query.userId;
 
-        const event = await Event.findById(eventId);
 
+        const event = await Event.updateOne({_id: eventId}, {
+            $push: {
+                members: userId
+            }
+        })
 
-        event.members.push(userId);
-        event.save();
+        res.send({message: 'Success', data: event})
     } catch (err){
         console.error('Error adding user to event:', err);
         res.status(500).json({ error: 'Internal Server Error' });

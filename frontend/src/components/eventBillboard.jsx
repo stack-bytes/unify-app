@@ -4,6 +4,7 @@ import LogoutIcon from '../../assets/icons/logout-icon.svg';
 import InfoIcon from '../../assets/icons/info-icon.svg';
 import { useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
+import {SERVER_IP} from '../../settings.json';
 
 export const EventBillboard = ({navigation, setFocusedMarkerIndex, event, CustomButton}) => {
     const { user, setCurrentEvent } = useContext(UserContext); 
@@ -39,7 +40,13 @@ export const EventBillboard = ({navigation, setFocusedMarkerIndex, event, Custom
         }
     }
     const joinEvent = () => {
-        setCurrentEvent(event)
+        setCurrentEvent(event);
+        fetch(`${SERVER_IP}:4949/api/user/addUserToEvent?userId=${user.id}&eventId=${event._id}`, {
+            method: 'POST',
+        }).then((res) => res.json())
+        .then((data) => {
+            console.log(data.data);
+        })
     }
     return (
         <View className="relative w-[90vw] h-[200px] border-2 border-[#121212]/[0.3]  rounded-md">

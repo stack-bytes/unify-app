@@ -49,7 +49,7 @@ const postPhoto = async (req, res) => {
         if(req.file){
             const result = await uploader.upload(req.file.path);
             if(result){
-                const oldPhoto = await EventPhoto.findByIdAndRemove({
+                const oldPhoto = await EventPhoto.findOneAndDelete({
                     eventId: req.body.eventId,
                     userId: req.body.userId,
                 });
@@ -59,7 +59,7 @@ const postPhoto = async (req, res) => {
                     eventId: req.body.eventId,
                     userId: req.body.userId,
                 })
-
+                console.log("Uploaded photo to the cloud!", result.secure_url);
                 res.send({data: newPhoto});
             } else {
                 res.status(500);
