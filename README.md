@@ -2,6 +2,13 @@
 #### Hey there! Welcome to the Unify App, where the vibes are good, and the connections are even better. 🚀
 ## About Us
 
+# Screenshots 
+![Auth Screen](https://github.com/stack-bytes/unify-app/assets/147537737/9419fa6d-a962-48cd-8b51-a496632e30e2)
+![Map Screen](https://github.com/stack-bytes/unify-app/assets/147537737/714d1b43-74e2-4154-a877-dff28d96b864)
+![Profile Screen](https://github.com/stack-bytes/unify-app/assets/147537737/a3263c91-a3bd-451d-ba25-d6a512bd3158)
+
+
+
 Unify App is your go-to for bringing people together and making those real connections. We're rocking the MERN (MongoDB, Express.js, React Native, Node.js) stack, cooking up something special to boost community spirit. 🌐
 
 Whether you're on the lookout for cool local events, some friendly faces, or just good vibes, Unify App has got you covered.
